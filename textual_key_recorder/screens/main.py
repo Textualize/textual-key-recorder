@@ -6,7 +6,7 @@ from textual import on
 from textual.app import ComposeResult
 from textual.containers import Horizontal, Vertical
 from textual.events import Key
-from textual.keys import Keys
+from textual.keys import Keys, KEY_TO_UNICODE_NAME
 from textual.message import Message
 from textual.screen import Screen
 from textual.widgets import Footer, Header, OptionList, Static
@@ -51,7 +51,11 @@ class ExpectedKeys(KeysDisplay):
 
     def __init__(self) -> None:
         """Initialise the widget."""
-        super().__init__(*[TestableKey(key.value) for key in Keys])
+        key_names = set(key.value for key in Keys)
+        key_names = key_names | set(KEY_TO_UNICODE_NAME.keys())
+        super().__init__(
+            *[TestableKey(key) for key in sorted(key_names) if not key.startswith("<")],
+        )
 
 
 class TriggeredKeys(KeysDisplay):
