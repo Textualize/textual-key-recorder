@@ -4,7 +4,7 @@ from dataclasses import dataclass
 
 from textual import on
 from textual.app import ComposeResult
-from textual.containers import Horizontal
+from textual.containers import Horizontal, Vertical
 from textual.events import Key
 from textual.keys import Keys
 from textual.message import Message
@@ -33,7 +33,6 @@ class KeysDisplay(OptionList):
     DEFAULT_CSS = """
     KeysDisplay {
         margin-top: 1;
-        margin-bottom: 1;
         border: panel cornflowerblue 50%;
         width: 1fr;
         height: 1fr;
@@ -59,6 +58,12 @@ class TriggeredKeys(KeysDisplay):
     """A widget to show the keys that have been triggered."""
 
     BORDER_TITLE = "Triggered Keys"
+
+
+class UnexpectedKeys(KeysDisplay):
+    """A widget to show the keys we didn't expect to encounter."""
+
+    BORDER_TITLE = "Unexpected Keys"
 
 
 class KeyInput(Static, can_focus=True):
@@ -124,7 +129,9 @@ class Main(Screen):
         yield KeyInput()
         with Horizontal():
             yield ExpectedKeys()
-            yield TriggeredKeys()
+            with Vertical():
+                yield TriggeredKeys()
+                yield UnexpectedKeys()
         yield Footer()
 
     @on(KeyInput.Triggered)
@@ -137,6 +144,7 @@ class Main(Screen):
 
         # Pull out the two lists.
         expected = self.query_one(ExpectedKeys)
+        unexpected = self.query_one(UnexpectedKeys)
         triggered = self.query_one(TriggeredKeys)
 
         try:
@@ -148,11 +156,13 @@ class Main(Screen):
             try:
                 _ = triggered.get_option(event.key.key)
             except OptionDoesNotExist:
-                # It's not in the list that was triggered either; so let's
-                # assume that we just plain don't know it.
-                self.notify(event.key.key, title="Key not expected", severity="error")
-                # TODO: log this in a list of keys that we didn't expect but
-                # for which we got a name.
+                # It's not in the list that was triggered either; so that
+                # suggests it's known, isn't expected, and we've not seen
+                # it. Guess it's unexpected then!
+                try:
+                    unexpected.add_option(TestableKey(event.key.key))
+                except DuplicateID:
+                    pass
             return
 
         # If the key was expected...
