@@ -51,10 +51,8 @@ class ExpectedKeys(KeysDisplay):
 
     def __init__(self) -> None:
         """Initialise the widget."""
-        key_names = set(key.value for key in Keys)
-        key_names = key_names | set(KEY_TO_UNICODE_NAME.keys())
         super().__init__(
-            *[TestableKey(key) for key in sorted(key_names) if not key.startswith("<")],
+            *[TestableKey(key) for key in sorted(set(key.value for key in Keys) | set(KEY_TO_UNICODE_NAME.keys())) if not key.startswith("<")],
         )
 
 
