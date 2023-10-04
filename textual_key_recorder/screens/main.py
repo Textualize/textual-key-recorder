@@ -95,7 +95,10 @@ class KeyInput(Static, can_focus=True):
 
     @dataclass
     class Triggered(Message):
+        """Event raised when a key is triggered."""
+
         key: Key
+        """The key that was triggered."""
 
     def __init__(self) -> None:
         """Initialise the widget."""
