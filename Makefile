@@ -2,7 +2,7 @@
 # Common make values.
 .DEFAULT_GOAL := run
 package       := textual_key_recorder
-code          := src/$(package)
+code          := $(package)
 run           := poetry run
 python        := $(run) python
 textual       := $(run) textual
