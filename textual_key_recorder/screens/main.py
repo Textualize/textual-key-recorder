@@ -1,5 +1,7 @@
 """The main screen for the application."""
 
+from __future__ import annotations
+
 from dataclasses import dataclass
 
 from textual import on
@@ -10,18 +12,19 @@ from textual.keys import KEY_TO_UNICODE_NAME, Keys
 from textual.message import Message
 from textual.screen import Screen
 from textual.widgets import Footer, Header, OptionList, Static
-from textual.widgets.option_list import DuplicateID, Option, OptionDoesNotExist
+from textual.widgets.option_list import Option, OptionDoesNotExist
 
 
 class TestableKey(Option):
     """A class for holding details of a testable key."""
 
-    def __init__(self, key: str) -> None:
+    def __init__(self, key: str | Key) -> None:
         """Initialise the testable key.
 
         Args:
             key: The name of the key.
         """
+        key = key if isinstance(key, str) else key.key
         super().__init__(key, id=key)
         self.notes = ""
         """Holds user-entered notes about the key."""
@@ -42,6 +45,18 @@ class KeysDisplay(OptionList):
         border: panel cornflowerblue;
     }
     """
+
+    def __contains__(self, key: str | Key) -> bool:
+        """Is the given key in this list?
+
+        Args:
+            key: The key to test for.
+        """
+        try:
+            _ = self.get_option(key if isinstance(key, str) else key.key)
+        except OptionDoesNotExist:
+            return False
+        return True
 
 
 class ExpectedKeys(KeysDisplay):
@@ -150,36 +165,26 @@ class Main(Screen):
             event: The key trigger event.
         """
 
-        # Pull out the two lists.
+        # Pull out the various lists.
         expected = self.query_one(ExpectedKeys)
         unexpected = self.query_one(UnexpectedKeys)
         triggered = self.query_one(TriggeredKeys)
 
-        try:
-            # Is the key in the list of expected keys?
-            expected_key = expected.get_option(event.key.key)
-        except OptionDoesNotExist:
-            # It's not there, but it could have been triggered already, so
-            # let's check that...
-            try:
-                _ = triggered.get_option(event.key.key)
-            except OptionDoesNotExist:
-                # It's not in the list that was triggered either; so that
-                # suggests it's known, isn't expected, and we've not seen
-                # it. Guess it's unexpected then!
-                try:
-                    unexpected.add_option(TestableKey(event.key.key))
-                except DuplicateID:
-                    pass
-            return
+        # First off, get the key that was triggered.
+        triggered_key = event.key
 
-        # If the key was expected...
-        if expected_key is not None:
-            try:
-                # ...add it to the list of triggered keys.
-                triggered.add_option(expected_key)
-            except DuplicateID:
-                # Oh, wait, we already know about it. Carry on.
-                pass
-            # Finally, remove it from the list of expected keys.
-            expected.remove_option(event.key.key)
+        # Figure out where the key should land, if at all.
+        if triggered_key in expected:
+            # It's in the expected list, so move it over to the triggered list.
+            expected.remove_option(triggered_key.key)
+            triggered.add_option(TestableKey(triggered_key))
+        elif triggered_key.is_printable:
+            # Printable keys that we weren't expecting are treated as kind
+            # of expected, so if it isn't in the triggered list yet, add it
+            # now.
+            if triggered_key not in triggered:
+                triggered.add_option(TestableKey(triggered_key))
+        elif triggered_key not in triggered and triggered_key not in unexpected:
+            # It's not expected and hasn't been triggered, and so far hasn't
+            # landed in the unexpected list; so add it now.
+            unexpected.add_option(TestableKey(triggered_key))
