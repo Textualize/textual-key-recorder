@@ -3,9 +3,12 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from json import dumps
+from pathlib import Path
 
 from textual import on
 from textual.app import ComposeResult
+from textual.binding import Binding
 from textual.containers import Horizontal, Vertical
 from textual.events import Key
 from textual.keys import KEY_TO_UNICODE_NAME, Keys
@@ -18,7 +21,7 @@ from textual.widgets.option_list import Option, OptionDoesNotExist
 class TestableKey(Option):
     """A class for holding details of a testable key."""
 
-    def __init__(self, key: str | Key) -> None:
+    def __init__(self, key: str | Key, notes: str = "") -> None:
         """Initialise the testable key.
 
         Args:
@@ -26,8 +29,31 @@ class TestableKey(Option):
         """
         key = key if isinstance(key, str) else key.key
         super().__init__(key, id=key)
-        self.notes = ""
+        self.notes = notes
         """Holds user-entered notes about the key."""
+
+    def to_json(self) -> dict[str, str]:
+        """Get the key data as a json-friendly data.
+
+        Returns:
+            The key data as json-friendly data.
+        """
+        assert self.id is not None
+        return {"key": self.id, "notes": self.notes}
+
+    @classmethod
+    def from_json(cls, data: dict[str, str]) -> TestableKey:
+        """Get a new `TestableKey` instance from json-friendly data.
+
+        Args:
+            data: The data to make the instance from.
+
+        Returns:
+            A fresh instance of `TestableKey`.
+        """
+        key = cls(data["key"])
+        key.notes = data.get("notes", "")
+        return key
 
 
 class KeysDisplay(OptionList):
@@ -57,6 +83,22 @@ class KeysDisplay(OptionList):
         except OptionDoesNotExist:
             return False
         return True
+
+    def to_json(self) -> list[dict[str, str]]:
+        """Get the keys in the list as json-friendly data.
+
+        Returns:
+            A json-friendly version of the data in the list.
+        """
+        return [key.to_json() for key in self._contents if isinstance(key, TestableKey)]
+
+    def from_json(self, data: list[dict[str, str]]) -> None:
+        """Set the content of the list to the content of the given json-friendly data.
+
+        Args:
+            data: The data to load into the list.
+        """
+        self.clear_options().add_options(TestableKey.from_json(key) for key in data)
 
 
 class ExpectedKeys(KeysDisplay):
@@ -149,6 +191,10 @@ class KeyInput(Static, can_focus=True):
 class Main(Screen):
     """The main screen of the application."""
 
+    BINDINGS = [
+        Binding("ctrl+s", "save", "Save progress"),
+    ]
+
     def compose(self) -> ComposeResult:
         """Compose the child widgets."""
         yield Header()
@@ -191,3 +237,21 @@ class Main(Screen):
             # It's not expected and hasn't been triggered, and so far hasn't
             # landed in the unexpected list; so add it now.
             unexpected.add_option(TestableKey(triggered_key))
+
+    def to_json(self) -> dict[str, list[dict[str, str]]]:
+        """Get the state of the screen as a json-friendly data structure.
+
+        Returns:
+            A json-friendly structure of the data.
+        """
+        return {
+            "expected": self.query_one(ExpectedKeys).to_json(),
+            "unexpected": self.query_one(UnexpectedKeys).to_json(),
+            "triggered": self.query_one(TriggeredKeys).to_json(),
+        }
+
+    def action_save(self) -> None:
+        """Save the current progress."""
+        Path("~/recorded-keys.json").expanduser().write_text(
+            dumps(self.to_json(), indent=4)
+        )
