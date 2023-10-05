@@ -110,7 +110,10 @@ class KeyInput(Static, can_focus=True):
 
     @dataclass
     class Triggered(Message):
+        """Event raised when a key is triggered."""
+
         key: Key
+        """The key that was triggered."""
 
     def __init__(self) -> None:
         """Initialise the widget."""
@@ -133,7 +136,7 @@ class KeyInput(Static, can_focus=True):
         self.update(f"{event!r}")
         self.post_message(self.Triggered(event))
 
-        # If this is out first attempt at a focus switch don't switch but
+        # If this is our first attempt at a focus switch don't switch but
         # record it's fine form now on.
         if event.key == "tab":
             self.tab_tested = True
