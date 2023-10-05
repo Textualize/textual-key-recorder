@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from functools import partial
-from json import dumps, loads
+from json import dumps, loads, JSONDecodeError
 from pathlib import Path
 
 from textual import on
@@ -307,16 +307,35 @@ class Main(Screen):
                 happen.
         """
         if load_file is not None:
-            # TODO: Error checking.
-            data = loads(load_file.read_text())
-            self.progress_file = load_file
-            self.query_one(ExpectedKeys).from_json(data["expected"])
-            self.query_one(UnexpectedKeys).from_json(data["unexpected"])
-            self.query_one(TriggeredKeys).from_json(data["triggered"])
-            self.query_one(KeyInput).tab_tested = "tab" in self.query_one(TriggeredKeys)
-            self.query_one(KeyInput).shift_tab_tested = "shift+tab" in self.query_one(
-                TriggeredKeys
-            )
+
+            def error():
+                self.notify(
+                    "Not a valid key recording session file.",
+                    title="Error loading file",
+                    severity="error",
+                    timeout=6,
+                )
+
+            try:
+                data = loads(load_file.read_text())
+            except JSONDecodeError:
+                error()
+                return
+            if all(
+                required in data for required in ("expected", "unexpected", "triggered")
+            ):
+                self.progress_file = load_file
+                self.query_one(ExpectedKeys).from_json(data["expected"])
+                self.query_one(UnexpectedKeys).from_json(data["unexpected"])
+                self.query_one(TriggeredKeys).from_json(data["triggered"])
+                self.query_one(KeyInput).tab_tested = "tab" in self.query_one(
+                    TriggeredKeys
+                )
+                self.query_one(
+                    KeyInput
+                ).shift_tab_tested = "shift+tab" in self.query_one(TriggeredKeys)
+            else:
+                error()
 
     def action_load(self) -> None:
         """Load a progress file."""
