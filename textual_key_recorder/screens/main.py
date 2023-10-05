@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from functools import partial
 from json import dumps
 from pathlib import Path
 
@@ -16,6 +17,8 @@ from textual.message import Message
 from textual.screen import Screen
 from textual.widgets import Footer, Header, OptionList, Static
 from textual.widgets.option_list import Option, OptionDoesNotExist
+
+from ..dialogs import Annotation
 
 
 class TestableKey(Option):
@@ -72,6 +75,8 @@ class KeysDisplay(OptionList):
     }
     """
 
+    BINDINGS = [Binding("enter", "annotate", "Annotate Key")]
+
     def __contains__(self, key: str | Key) -> bool:
         """Is the given key in this list?
 
@@ -99,6 +104,24 @@ class KeysDisplay(OptionList):
             data: The data to load into the list.
         """
         self.clear_options().add_options(TestableKey.from_json(key) for key in data)
+
+    def _update_notes(self, key: TestableKey, notes: str) -> None:
+        """Update the notes for the given key.
+
+        Args:
+            key: The key to update.
+            notes: The notes to update the key with.
+        """
+        key.notes = notes
+
+    def action_annotate(self) -> None:
+        """Annotate the current key."""
+        if self.highlighted is not None:
+            key = self.get_option_at_index(self.highlighted)
+            assert isinstance(key, TestableKey) and key.id is not None
+            self.app.push_screen(
+                Annotation(key.id, key.notes), callback=partial(self._update_notes, key)
+            )
 
 
 class ExpectedKeys(KeysDisplay):
