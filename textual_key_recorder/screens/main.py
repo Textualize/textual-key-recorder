@@ -14,9 +14,12 @@ from textual.containers import Horizontal, Vertical
 from textual.events import Key
 from textual.keys import KEY_TO_UNICODE_NAME, Keys
 from textual.message import Message
+from textual.reactive import var
 from textual.screen import Screen
 from textual.widgets import Footer, Header, OptionList, Static
 from textual.widgets.option_list import Option, OptionDoesNotExist
+
+from textual_fspicker import FileSave
 
 from ..dialogs import Annotation
 
@@ -218,6 +221,9 @@ class Main(Screen):
         Binding("ctrl+s", "save", "Save progress"),
     ]
 
+    progress_file: var[Path | None] = var(None)
+    """The file where progress is recorded."""
+
     def compose(self) -> ComposeResult:
         """Compose the child widgets."""
         yield Header()
@@ -273,8 +279,27 @@ class Main(Screen):
             "triggered": self.query_one(TriggeredKeys).to_json(),
         }
 
+    def _save_data(self, save_file: Path | None) -> None:
+        """Save the current state to the given file.
+
+        Args:
+            save_file: The file to save to, or `None` if no save should
+                happen.
+        """
+        if save_file is not None:
+            self.progress_file = save_file
+            save_file.write_text(dumps(self.to_json(), indent=4))
+            self.notify(str(save_file), title="Saved")
+
     def action_save(self) -> None:
         """Save the current progress."""
-        Path("~/recorded-keys.json").expanduser().write_text(
-            dumps(self.to_json(), indent=4)
+        if self.progress_file is None:
+            self.app.push_screen(FileSave(), callback=self._save_data)
+        else:
+            self._save_data(self.progress_file)
+
+    def _watch_progress_file(self) -> None:
+        """Update the subtitle of the app when the progress file changes."""
+        self.app.sub_title = (
+            "Untitled" if self.progress_file is None else str(self.progress_file)
         )

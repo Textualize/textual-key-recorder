@@ -584,6 +584,19 @@ tree_sitter_languages = {version = ">=1.7.0", markers = "python_version >= \"3.8
 typing-extensions = ">=4.4.0,<5.0.0"
 
 [[package]]
+name = "textual-fspicker"
+version = "0.0.10"
+description = "A simple Textual filesystem picker dialog library."
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "textual_fspicker-0.0.10-py3-none-any.whl", hash = "sha256:03a4ea8eb9384e63002a857d288ec6b9e8f67282d439d166a090be256e9ccc8b"},
+]
+
+[package.dependencies]
+textual = ">=0.31.0"
+
+[[package]]
 name = "tomlkit"
 version = "0.12.1"
 description = "Style preserving TOML library"
@@ -867,4 +880,4 @@ testing = ["big-O", "jaraco.functools", "jaraco.itertools", "more-itertools", "p
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "f0a301c6b72ce947c1e58147f5d9e8edbba2c5ed55b327aa37d4125970ba480d"
+content-hash = "009ef5fda718891761818374e9b0ccb907d83f3784e20937f82e0f052bf54899"

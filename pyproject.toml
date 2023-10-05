@@ -25,6 +25,7 @@ classifiers = [
 [tool.poetry.dependencies]
 python = "^3.11"
 textual = "^0.38.1"
+textual-fspicker = "^0.0.10"
 
 [tool.poetry.group.dev.dependencies]
 pylint = "^2.17.1"
