@@ -21,7 +21,7 @@ from textual.widgets.option_list import Option, OptionDoesNotExist
 
 from textual_fspicker import FileOpen, FileSave, Filters
 
-from ..dialogs import Annotation
+from ..dialogs import Annotation, YesNo
 
 
 class TestableKey(Option):
@@ -376,9 +376,26 @@ class Main(Screen):
             else:
                 error()
 
+    def _initiate_load(self, really_load: bool = True) -> None:
+        """Core file loading method.
+
+        Args:
+            really_load: Flag to say if we should really load the file.
+        """
+        if really_load:
+            self.app.push_screen(
+                FileOpen(filters=self.FILTERS), callback=self._load_data
+            )
+
     def action_load(self) -> None:
-        """Load a progress file."""
-        self.app.push_screen(FileOpen(filters=self.FILTERS), callback=self._load_data)
+        """Start the process of loading a progress file."""
+        if self.dirty:
+            self.app.push_screen(
+                YesNo("You have unsaved data, do you really want to load?"),
+                callback=self._initiate_load,
+            )
+        else:
+            self._initiate_load()
 
     def _refresh_subtitle(self) -> None:
         """Refresh the subtitle of the app."""
