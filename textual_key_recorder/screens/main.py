@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from functools import partial
-from json import dumps
+from json import dumps, loads
 from pathlib import Path
 
 from textual import on
@@ -19,7 +19,7 @@ from textual.screen import Screen
 from textual.widgets import Footer, Header, OptionList, Static
 from textual.widgets.option_list import Option, OptionDoesNotExist
 
-from textual_fspicker import FileSave
+from textual_fspicker import FileOpen, FileSave
 
 from ..dialogs import Annotation
 
@@ -218,6 +218,7 @@ class Main(Screen):
     """The main screen of the application."""
 
     BINDINGS = [
+        Binding("ctrl+l", "load", "Load progress"),
         Binding("ctrl+s", "save", "Save progress"),
     ]
 
@@ -297,6 +298,29 @@ class Main(Screen):
             self.app.push_screen(FileSave(), callback=self._save_data)
         else:
             self._save_data(self.progress_file)
+
+    def _load_data(self, load_file: Path | None) -> None:
+        """Load state from the given file.
+
+        Args:
+            load_file: The file to load from, or `None` if no load is to
+                happen.
+        """
+        if load_file is not None:
+            # TODO: Error checking.
+            data = loads(load_file.read_text())
+            self.progress_file = load_file
+            self.query_one(ExpectedKeys).from_json(data["expected"])
+            self.query_one(UnexpectedKeys).from_json(data["unexpected"])
+            self.query_one(TriggeredKeys).from_json(data["triggered"])
+            self.query_one(KeyInput).tab_tested = "tab" in self.query_one(TriggeredKeys)
+            self.query_one(KeyInput).shift_tab_tested = "shift+tab" in self.query_one(
+                TriggeredKeys
+            )
+
+    def action_load(self) -> None:
+        """Load a progress file."""
+        self.app.push_screen(FileOpen(), callback=self._load_data)
 
     def _watch_progress_file(self) -> None:
         """Update the subtitle of the app when the progress file changes."""
