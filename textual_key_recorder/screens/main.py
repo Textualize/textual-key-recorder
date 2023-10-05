@@ -19,7 +19,7 @@ from textual.screen import Screen
 from textual.widgets import Footer, Header, OptionList, Static
 from textual.widgets.option_list import Option, OptionDoesNotExist
 
-from textual_fspicker import FileOpen, FileSave
+from textual_fspicker import FileOpen, FileSave, Filters
 
 from ..dialogs import Annotation
 
@@ -244,6 +244,14 @@ class Main(Screen):
     dirty: var[bool] = var(False)
     """Is the data dirty?"""
 
+    FILE_EXTENSION = ".tkrec"
+    """The extension used for the files saved by this application."""
+
+    FILTERS = Filters(
+        ("Textual Keys Recording", lambda p: p.suffix.lower() == Main.FILE_EXTENSION)
+    )
+    """The filters to use for the file dialogs."""
+
     def compose(self) -> ComposeResult:
         """Compose the child widgets."""
         yield Header()
@@ -315,6 +323,7 @@ class Main(Screen):
                 happen.
         """
         if save_file is not None:
+            save_file = save_file.with_suffix(self.FILE_EXTENSION)
             self.progress_file = save_file
             save_file.write_text(dumps(self.to_json(), indent=4))
             self.dirty = False
@@ -323,7 +332,9 @@ class Main(Screen):
     def action_save(self) -> None:
         """Save the current progress."""
         if self.progress_file is None:
-            self.app.push_screen(FileSave(), callback=self._save_data)
+            self.app.push_screen(
+                FileSave(filters=self.FILTERS), callback=self._save_data
+            )
         else:
             self._save_data(self.progress_file)
 
@@ -367,7 +378,7 @@ class Main(Screen):
 
     def action_load(self) -> None:
         """Load a progress file."""
-        self.app.push_screen(FileOpen(), callback=self._load_data)
+        self.app.push_screen(FileOpen(filters=self.FILTERS), callback=self._load_data)
 
     def _refresh_subtitle(self) -> None:
         """Refresh the subtitle of the app."""
