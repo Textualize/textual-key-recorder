@@ -80,6 +80,20 @@ class KeysDisplay(OptionList):
 
     BINDINGS = [Binding("enter", "annotate", "Annotate Key")]
 
+    @dataclass
+    class NotesUpdated(Message):
+        """Message posted when the notes of a key are modified."""
+
+        keys_list: KeysDisplay
+        """The list that handled the update."""
+        key: TestableKey
+        """The key that was updated."""
+
+        @property
+        def control(self) -> KeysDisplay:
+            """The control sending the message."""
+            return self.keys_list
+
     def __contains__(self, key: str | Key) -> bool:
         """Is the given key in this list?
 
@@ -115,7 +129,9 @@ class KeysDisplay(OptionList):
             key: The key to update.
             notes: The notes to update the key with.
         """
-        key.notes = notes
+        if key.notes != notes:
+            self.post_message(self.NotesUpdated(self, key))
+            key.notes = notes
 
     def action_annotate(self) -> None:
         """Annotate the current key."""
@@ -225,6 +241,9 @@ class Main(Screen):
     progress_file: var[Path | None] = var(None)
     """The file where progress is recorded."""
 
+    dirty: var[bool] = var(False)
+    """Is the data dirty?"""
+
     def compose(self) -> ComposeResult:
         """Compose the child widgets."""
         yield Header()
@@ -235,6 +254,11 @@ class Main(Screen):
                 yield TriggeredKeys()
                 yield UnexpectedKeys()
         yield Footer()
+
+    @on(KeysDisplay.NotesUpdated)
+    def _mark_dirty(self) -> None:
+        """Mark the data as dirty in response to events."""
+        self.dirty = True
 
     @on(KeyInput.Triggered)
     def mark_key_as_triggered(self, event: KeyInput.Triggered):
@@ -257,16 +281,19 @@ class Main(Screen):
             # It's in the expected list, so move it over to the triggered list.
             expected.remove_option(triggered_key.key)
             triggered.add_option(TestableKey(triggered_key))
+            self.dirty = True
         elif triggered_key.is_printable:
             # Printable keys that we weren't expecting are treated as kind
             # of expected, so if it isn't in the triggered list yet, add it
             # now.
             if triggered_key not in triggered:
                 triggered.add_option(TestableKey(triggered_key))
+                self.dirty = True
         elif triggered_key not in triggered and triggered_key not in unexpected:
             # It's not expected and hasn't been triggered, and so far hasn't
             # landed in the unexpected list; so add it now.
             unexpected.add_option(TestableKey(triggered_key))
+            self.dirty = True
 
     def to_json(self) -> dict[str, list[dict[str, str]]]:
         """Get the state of the screen as a json-friendly data structure.
@@ -290,6 +317,7 @@ class Main(Screen):
         if save_file is not None:
             self.progress_file = save_file
             save_file.write_text(dumps(self.to_json(), indent=4))
+            self.dirty = False
             self.notify(str(save_file), title="Saved")
 
     def action_save(self) -> None:
@@ -341,8 +369,16 @@ class Main(Screen):
         """Load a progress file."""
         self.app.push_screen(FileOpen(), callback=self._load_data)
 
-    def _watch_progress_file(self) -> None:
-        """Update the subtitle of the app when the progress file changes."""
+    def _refresh_subtitle(self) -> None:
+        """Refresh the subtitle of the app."""
         self.app.sub_title = (
             "Untitled" if self.progress_file is None else str(self.progress_file)
-        )
+        ) + (" (unsaved)" if self.dirty else "")
+
+    def _watch_progress_file(self) -> None:
+        """Refresh when the progress file name changes."""
+        self._refresh_subtitle()
+
+    def _watch_dirty(self) -> None:
+        """Refresh when the dirty flag changes."""
+        self._refresh_subtitle()
