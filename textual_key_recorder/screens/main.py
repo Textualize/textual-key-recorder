@@ -26,6 +26,17 @@ from ..widgets import (
 )
 
 
+class AdminArea(Horizontal):
+    """The area of the application where admin tasks can take place."""
+
+    def compose(self) -> ComposeResult:
+        """Compose the child widgets."""
+        yield ExpectedKeys()
+        with Vertical():
+            yield TriggeredKeys()
+            yield UnexpectedKeys()
+
+
 class Main(Screen):
     """The main screen of the application."""
 
@@ -52,11 +63,7 @@ class Main(Screen):
         """Compose the child widgets."""
         yield Header()
         yield KeyInput()
-        with Horizontal():
-            yield ExpectedKeys()
-            with Vertical():
-                yield TriggeredKeys()
-                yield UnexpectedKeys()
+        yield AdminArea()
         yield Footer()
 
     @on(KeysDisplay.NotesUpdated)
