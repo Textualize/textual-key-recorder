@@ -9,6 +9,7 @@ from textual import on
 from textual.app import ComposeResult
 from textual.binding import Binding
 from textual.containers import Horizontal, Vertical
+from textual.message import Message
 from textual.reactive import var
 from textual.screen import Screen
 from textual.widgets import Footer, Header
@@ -29,17 +30,6 @@ from ..widgets import (
 class AdminArea(Horizontal):
     """The area of the application where admin tasks can take place."""
 
-    def compose(self) -> ComposeResult:
-        """Compose the child widgets."""
-        yield ExpectedKeys()
-        with Vertical():
-            yield TriggeredKeys()
-            yield UnexpectedKeys()
-
-
-class Main(Screen):
-    """The main screen of the application."""
-
     BINDINGS = [
         Binding("ctrl+l", "load", "Load progress"),
         Binding("ctrl+s", "save", "Save progress"),
@@ -55,56 +45,22 @@ class Main(Screen):
     """The extension used for the files saved by this application."""
 
     FILTERS = Filters(
-        ("Textual Keys Recording", lambda p: p.suffix.lower() == Main.FILE_EXTENSION)
+        (
+            "Textual Keys Recording",
+            lambda p: p.suffix.lower() == AdminArea.FILE_EXTENSION,
+        )
     )
     """The filters to use for the file dialogs."""
 
+    class DataLoaded(Message):
+        """Message posted when fresh data is loaded."""
+
     def compose(self) -> ComposeResult:
         """Compose the child widgets."""
-        yield Header()
-        yield KeyInput()
-        yield AdminArea()
-        yield Footer()
-
-    @on(KeysDisplay.NotesUpdated)
-    def _mark_dirty(self) -> None:
-        """Mark the data as dirty in response to events."""
-        self.dirty = True
-
-    @on(KeyInput.Triggered)
-    def mark_key_as_triggered(self, event: KeyInput.Triggered):
-        """Handle a key being triggered.
-
-        Args:
-            event: The key trigger event.
-        """
-
-        # Pull out the various lists.
-        expected = self.query_one(ExpectedKeys)
-        unexpected = self.query_one(UnexpectedKeys)
-        triggered = self.query_one(TriggeredKeys)
-
-        # First off, get the key that was triggered.
-        triggered_key = event.key
-
-        # Figure out where the key should land, if at all.
-        if triggered_key in expected:
-            # It's in the expected list, so move it over to the triggered list.
-            expected.remove_option(triggered_key.key)
-            triggered.add_option(TestableKey(triggered_key))
-            self.dirty = True
-        elif triggered_key.is_printable:
-            # Printable keys that we weren't expecting are treated as kind
-            # of expected, so if it isn't in the triggered list yet, add it
-            # now.
-            if triggered_key not in triggered:
-                triggered.add_option(TestableKey(triggered_key))
-                self.dirty = True
-        elif triggered_key not in triggered and triggered_key not in unexpected:
-            # It's not expected and hasn't been triggered, and so far hasn't
-            # landed in the unexpected list; so add it now.
-            unexpected.add_option(TestableKey(triggered_key))
-            self.dirty = True
+        yield ExpectedKeys()
+        with Vertical():
+            yield TriggeredKeys()
+            yield UnexpectedKeys()
 
     def to_json(self) -> dict[str, list[dict[str, str]]]:
         """Get the state of the screen as a json-friendly data structure.
@@ -170,12 +126,7 @@ class Main(Screen):
                 self.query_one(ExpectedKeys).from_json(data["expected"])
                 self.query_one(UnexpectedKeys).from_json(data["unexpected"])
                 self.query_one(TriggeredKeys).from_json(data["triggered"])
-                self.query_one(KeyInput).tab_tested = "tab" in self.query_one(
-                    TriggeredKeys
-                )
-                self.query_one(
-                    KeyInput
-                ).shift_tab_tested = "shift+tab" in self.query_one(TriggeredKeys)
+                self.post_message(self.DataLoaded())
             else:
                 error()
 
@@ -213,3 +164,60 @@ class Main(Screen):
     def _watch_dirty(self) -> None:
         """Refresh when the dirty flag changes."""
         self._refresh_subtitle()
+
+
+class Main(Screen):
+    """The main screen of the application."""
+
+    def compose(self) -> ComposeResult:
+        """Compose the child widgets."""
+        yield Header()
+        yield KeyInput()
+        yield AdminArea()
+        yield Footer()
+
+    @on(KeysDisplay.NotesUpdated)
+    def _mark_dirty(self) -> None:
+        """Mark the data as dirty in response to events."""
+        self.query_one(AdminArea).dirty = True
+
+    @on(AdminArea.DataLoaded)
+    def _reset_recorder(self) -> None:
+        triggered = self.query_one(TriggeredKeys)
+        self.query_one(KeyInput).tab_tested = "tab" in triggered
+        self.query_one(KeyInput).shift_tab_tested = "shift+tab" in triggered
+
+    @on(KeyInput.Triggered)
+    def mark_key_as_triggered(self, event: KeyInput.Triggered):
+        """Handle a key being triggered.
+
+        Args:
+            event: The key trigger event.
+        """
+
+        # Pull out the various lists.
+        expected = self.query_one(ExpectedKeys)
+        unexpected = self.query_one(UnexpectedKeys)
+        triggered = self.query_one(TriggeredKeys)
+
+        # First off, get the key that was triggered.
+        triggered_key = event.key
+
+        # Figure out where the key should land, if at all.
+        if triggered_key in expected:
+            # It's in the expected list, so move it over to the triggered list.
+            expected.remove_option(triggered_key.key)
+            triggered.add_option(TestableKey(triggered_key))
+            self._mark_dirty()
+        elif triggered_key.is_printable:
+            # Printable keys that we weren't expecting are treated as kind
+            # of expected, so if it isn't in the triggered list yet, add it
+            # now.
+            if triggered_key not in triggered:
+                triggered.add_option(TestableKey(triggered_key))
+                self._mark_dirty()
+        elif triggered_key not in triggered and triggered_key not in unexpected:
+            # It's not expected and hasn't been triggered, and so far hasn't
+            # landed in the unexpected list; so add it now.
+            unexpected.add_option(TestableKey(triggered_key))
+            self._mark_dirty()
