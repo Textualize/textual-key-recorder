@@ -183,6 +183,7 @@ class Main(Screen):
 
     @on(AdminArea.DataLoaded)
     def _reset_recorder(self) -> None:
+        """Configure things after new data has been loaded."""
         triggered = self.query_one(TriggeredKeys)
         self.query_one(KeyInput).tab_tested = "tab" in triggered
         self.query_one(KeyInput).shift_tab_tested = "shift+tab" in triggered
