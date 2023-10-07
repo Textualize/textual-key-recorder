@@ -63,7 +63,6 @@ class KeysDisplay(OptionList):
 
     DEFAULT_CSS = """
     KeysDisplay {
-        margin-top: 1;
         border: panel cornflowerblue 50%;
         width: 1fr;
         height: 1fr;

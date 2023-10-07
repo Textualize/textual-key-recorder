@@ -31,6 +31,17 @@ from ..widgets import (
 class AdminArea(Horizontal):
     """The area of the application where admin tasks can take place."""
 
+    DEFAULT_CSS = """
+    AdminArea {
+        margin-top: 1;
+        margin-bottom: 1;
+    }
+
+    UnexpectedKeys {
+        margin-top: 1;
+    }
+    """
+
     BINDINGS = [
         Binding("ctrl+l", "load", "Load progress"),
         Binding("ctrl+s", "save", "Save progress"),
