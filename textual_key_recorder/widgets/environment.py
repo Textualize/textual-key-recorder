@@ -61,7 +61,7 @@ class Environment(DataTable):
 
     DEFAULT_CSS = """
     Environment {
-        height: 1fr;
+        height: auto;
         border: panel cornflowerblue 50%;
         color: $text 50%;
     }
