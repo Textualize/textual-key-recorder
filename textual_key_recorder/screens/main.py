@@ -202,8 +202,8 @@ class Main(Screen):
         unexpected = self.query_one(UnexpectedKeys)
         triggered = self.query_one(TriggeredKeys)
 
-        def _add(key: Key, target: KeysDisplay) -> None:
-            target.add_option(TestableKey(key))
+        def _add(key: Key | TestableKey, target: KeysDisplay) -> None:
+            target.add_option(key if isinstance(key, TestableKey) else TestableKey(key))
             target.action_last()
             self._mark_dirty()
 
@@ -213,8 +213,8 @@ class Main(Screen):
         # Figure out where the key should land, if at all.
         if triggered_key in expected:
             # It's in the expected list, so move it over to the triggered list.
+            _add(expected.get_option(triggered_key.key), triggered)
             expected.remove_option(triggered_key.key)
-            _add(triggered_key, triggered)
         elif triggered_key.is_printable:
             # Printable keys that we weren't expecting are treated as kind
             # of expected, so if it isn't in the triggered list yet, add it

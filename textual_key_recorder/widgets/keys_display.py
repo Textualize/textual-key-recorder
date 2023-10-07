@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+from typing import cast
+
 from dataclasses import dataclass
 from functools import partial
 
@@ -131,3 +133,6 @@ class KeysDisplay(OptionList):
             self.app.push_screen(
                 Annotation(key.id, key.notes), callback=partial(self._update_notes, key)
             )
+
+    def get_option(self, option_id: str) -> TestableKey:
+        return cast(TestableKey, super().get_option(option_id))
