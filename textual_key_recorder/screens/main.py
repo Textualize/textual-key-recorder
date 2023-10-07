@@ -9,6 +9,7 @@ from textual import on
 from textual.app import ComposeResult
 from textual.binding import Binding
 from textual.containers import Horizontal, Vertical
+from textual.events import Key
 from textual.message import Message
 from textual.reactive import var
 from textual.screen import Screen
@@ -201,6 +202,11 @@ class Main(Screen):
         unexpected = self.query_one(UnexpectedKeys)
         triggered = self.query_one(TriggeredKeys)
 
+        def _add(key: Key, target: KeysDisplay) -> None:
+            target.add_option(TestableKey(key))
+            target.action_last()
+            self._mark_dirty()
+
         # First off, get the key that was triggered.
         triggered_key = event.key
 
@@ -208,17 +214,14 @@ class Main(Screen):
         if triggered_key in expected:
             # It's in the expected list, so move it over to the triggered list.
             expected.remove_option(triggered_key.key)
-            triggered.add_option(TestableKey(triggered_key))
-            self._mark_dirty()
+            _add(triggered_key, triggered)
         elif triggered_key.is_printable:
             # Printable keys that we weren't expecting are treated as kind
             # of expected, so if it isn't in the triggered list yet, add it
             # now.
             if triggered_key not in triggered:
-                triggered.add_option(TestableKey(triggered_key))
-                self._mark_dirty()
+                _add(triggered_key, triggered)
         elif triggered_key not in triggered and triggered_key not in unexpected:
             # It's not expected and hasn't been triggered, and so far hasn't
             # landed in the unexpected list; so add it now.
-            unexpected.add_option(TestableKey(triggered_key))
-            self._mark_dirty()
+            _add(triggered_key, unexpected)
