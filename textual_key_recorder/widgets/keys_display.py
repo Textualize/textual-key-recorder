@@ -4,6 +4,8 @@ from __future__ import annotations
 
 from typing import cast
 
+from typing_extensions import Final
+
 from dataclasses import dataclass
 from functools import partial
 
@@ -12,6 +14,8 @@ from textual.message import Message
 from textual.events import Key
 from textual.widgets import OptionList
 from textual.widgets.option_list import Option, OptionDoesNotExist
+
+from rich.emoji import Emoji
 
 from ..dialogs import Annotation
 
@@ -114,6 +118,9 @@ class KeysDisplay(OptionList):
         """
         self.clear_options().add_options(TestableKey.from_json(key) for key in data)
 
+    NOTE_ICON: Final[str] = Emoji.replace(":spiral_notepad:")
+    """The icon to use to indicate a key has a note attached."""
+
     def _update_notes(self, key: TestableKey, notes: str) -> None:
         """Update the notes for the given key.
 
@@ -121,9 +128,13 @@ class KeysDisplay(OptionList):
             key: The key to update.
             notes: The notes to update the key with.
         """
+        assert key.id is not None
         if key.notes != notes:
             self.post_message(self.NotesUpdated(self, key))
             key.notes = notes
+            self.replace_option_prompt(
+                key.id, f"{key.id} {self.NOTE_ICON}" if notes.strip() else key.id
+            )
 
     def action_annotate(self) -> None:
         """Annotate the current key."""
