@@ -50,7 +50,7 @@ class Annotation(ModalScreen[str]):
             yield TextArea(self._annotation)
             with Horizontal():
                 yield Button("Save", id="save")
-                yield Button("cancel", id="cancel")
+                yield Button("Cancel", id="cancel")
 
     def on_mount(self) -> None:
         """Configure the dialog once mounted."""
