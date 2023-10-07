@@ -19,6 +19,7 @@ from textual_fspicker import FileOpen, FileSave, Filters
 
 from ..dialogs import YesNo
 from ..widgets import (
+    Environment,
     KeyInput,
     KeysDisplay,
     ExpectedKeys,
@@ -37,7 +38,7 @@ class AdminArea(Horizontal):
         margin-bottom: 1;
     }
 
-    UnexpectedKeys {
+    Environment {
         margin-top: 1;
     }
     """
@@ -71,8 +72,10 @@ class AdminArea(Horizontal):
         """Compose the child widgets."""
         yield ExpectedKeys()
         with Vertical():
-            yield TriggeredKeys()
-            yield UnexpectedKeys()
+            with Horizontal():
+                yield TriggeredKeys()
+                yield UnexpectedKeys()
+            yield Environment()
 
     def to_json(self) -> dict[str, list[dict[str, str]]]:
         """Get the state of the screen as a json-friendly data structure.
