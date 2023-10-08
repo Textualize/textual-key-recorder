@@ -81,3 +81,29 @@ class Environment(DataTable):
         self.add_row("OS Version", platform.version())
         self.add_row("Textual", __version__)
         self.add_row("Terminal", _guess_term())
+
+    def to_json(self) -> dict[str, str]:
+        """Get the environment information as json-friendly data.
+
+        Returns:
+            The environment data as json-friendly data.
+        """
+        return {
+            "os_system": platform.system(),
+            "os_release": platform.release(),
+            "os_version": platform.version(),
+            "textual": __version__,
+            "terminal": _guess_term(),
+        }
+
+    def is_similar(self, compare: dict[str, str]) -> bool:
+        """Is the current environment the similar to another environment?
+
+        Args:
+            compare: The environment to compare to the current one.
+
+        Returns:
+            `True` if they're similar, `False` if different.
+        """
+        current = self.to_json()
+        return all(current[key] == compare[key] for key in ("os_system", "terminal"))

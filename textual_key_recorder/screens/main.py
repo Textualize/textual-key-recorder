@@ -77,13 +77,14 @@ class AdminArea(Horizontal):
                 yield UnexpectedKeys()
             yield Environment()
 
-    def to_json(self) -> dict[str, list[dict[str, str]]]:
+    def to_json(self) -> dict[str, dict[str, str] | list[dict[str, str]]]:
         """Get the state of the screen as a json-friendly data structure.
 
         Returns:
             A json-friendly structure of the data.
         """
         return {
+            "environment": self.query_one(Environment).to_json(),
             "expected": self.query_one(ExpectedKeys).to_json(),
             "unexpected": self.query_one(UnexpectedKeys).to_json(),
             "triggered": self.query_one(TriggeredKeys).to_json(),
@@ -142,6 +143,14 @@ class AdminArea(Horizontal):
                 self.query_one(UnexpectedKeys).from_json(data["unexpected"])
                 self.query_one(TriggeredKeys).from_json(data["triggered"])
                 self.post_message(self.DataLoaded())
+                if not self.query_one(Environment).is_similar(
+                    data.get("environment", {})
+                ):
+                    self.notify(
+                        "Data loaded for a dissimilar environment!",
+                        severity="warning",
+                        timeout=8,
+                    )
             else:
                 error()
 
