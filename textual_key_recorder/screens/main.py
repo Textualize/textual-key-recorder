@@ -187,7 +187,11 @@ class AdminArea(Horizontal):
             self._initiate_load()
 
     def _really_quit(self, confirmed: bool) -> None:
-        """Unconditionally exit the application."""
+        """Unconditionally exit the application.
+
+        Args:
+            confirmed: Was the quit confirmed by the user?
+        """
         if confirmed:
             self.app.exit()
 
