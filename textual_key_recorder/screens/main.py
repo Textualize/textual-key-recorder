@@ -145,7 +145,8 @@ class AdminArea(Horizontal):
                 error()
                 return
             if all(
-                required in data for required in ("expected", "unexpected", "triggered")
+                required in data
+                for required in ("expected", "unexpected", "triggered", "unknown")
             ):
                 self.progress_file = load_file
                 self.query_one(ExpectedKeys).from_json(data["expected"])
