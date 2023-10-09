@@ -67,14 +67,23 @@ class Environment(DataTable):
         scrollbar-gutter: stable;
     }
 
+    Environment > .datatable--header {
+        color: $text 50%;
+    }
+
     Environment:focus {
         border: panel cornflowerblue;
+        color: $text;
+    }
+
+    Environment:focus > .datatable--header {
         color: $text;
     }
     """
 
     def on_mount(self) -> None:
         """Configure the environment display once the DOM is ready."""
+        self.cursor_type = "none"
         self.add_column("Name", key="name")
         self.add_column("Value", key="value")
         self.add_row("OS System", platform.system())
