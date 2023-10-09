@@ -51,6 +51,7 @@ class AdminArea(Horizontal):
     BINDINGS = [
         Binding("ctrl+l", "load", "Load progress"),
         Binding("ctrl+s", "save", "Save progress"),
+        Binding("ctrl+q", "quit_recorder", "Quit"),
     ]
 
     progress_file: var[Path | None] = var(None)
@@ -183,6 +184,21 @@ class AdminArea(Horizontal):
             )
         else:
             self._initiate_load()
+
+    def _really_quit(self, confirmed: bool) -> None:
+        """Unconditionally exit the application."""
+        if confirmed:
+            self.app.exit()
+
+    def action_quit_recorder(self) -> None:
+        """Quit the recorder."""
+        if self.dirty:
+            self.app.push_screen(
+                YesNo("You have unsaved data, do you really want to quit?"),
+                callback=self._really_quit,
+            )
+        else:
+            self.app.exit()
 
     def _refresh_subtitle(self) -> None:
         """Refresh the subtitle of the app."""

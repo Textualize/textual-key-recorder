@@ -4,6 +4,8 @@ from textual.app import App
 
 from .screens import Main
 
+App.BINDINGS = []  # Nuke the default Textual bindings.
+
 
 class TextualKeyRecorder(App[None]):
     """Application class for the Textual key recorder."""
