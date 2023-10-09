@@ -2,6 +2,7 @@
 
 from dataclasses import dataclass
 
+from textual._xterm_parser import XTermParser
 from textual.events import Key
 from textual.message import Message
 from textual.widgets import Static
@@ -33,11 +34,32 @@ class KeyInput(Static, can_focus=True):
         key: Key
         """The key that was triggered."""
 
+    @dataclass
+    class Unknown(Message):
+        """Event raised when an unknown sequence comes in."""
+
+        sequence: str
+        """The sequence that came in."""
+
     def __init__(self) -> None:
         """Initialise the widget."""
         super().__init__("Press a key to test...")
         self.tab_tested = False
         self.shift_tab_tested = False
+
+    def _unknown_sequence(self, sequence: str) -> None:
+        """Report an unknown sequence.
+
+        Args:
+            sequence: The unknown sequence to report.
+        """
+        self.post_message(self.Unknown(repr(sequence)[1:-1]))
+
+    def on_mount(self) -> None:
+        """Configure the key input widget once the DOM is ready."""
+        # Hook into the parser so that we can be informed about unknown
+        # sequences.
+        XTermParser._reissued_sequence_debug_book = self._unknown_sequence
 
     def on_key(self, event: Key):
         """Handle keystrokes.

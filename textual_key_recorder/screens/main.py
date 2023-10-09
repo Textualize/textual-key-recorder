@@ -25,6 +25,7 @@ from ..widgets import (
     ExpectedKeys,
     TriggeredKeys,
     UnexpectedKeys,
+    UnknownKeys,
     TestableKey,
 )
 
@@ -39,6 +40,10 @@ class AdminArea(Horizontal):
     }
 
     Environment {
+        margin-top: 1;
+    }
+
+    UnknownKeys {
         margin-top: 1;
     }
     """
@@ -74,7 +79,9 @@ class AdminArea(Horizontal):
         with Vertical():
             with Horizontal():
                 yield TriggeredKeys()
-                yield UnexpectedKeys()
+                with Vertical():
+                    yield UnexpectedKeys()
+                    yield UnknownKeys()
             yield Environment()
 
     def to_json(self) -> dict[str, dict[str, str] | list[dict[str, str]]]:
@@ -87,6 +94,7 @@ class AdminArea(Horizontal):
             "environment": self.query_one(Environment).to_json(),
             "expected": self.query_one(ExpectedKeys).to_json(),
             "unexpected": self.query_one(UnexpectedKeys).to_json(),
+            "unknown": self.query_one(UnknownKeys).to_json(),
             "triggered": self.query_one(TriggeredKeys).to_json(),
         }
 
@@ -142,6 +150,7 @@ class AdminArea(Horizontal):
                 self.query_one(ExpectedKeys).from_json(data["expected"])
                 self.query_one(UnexpectedKeys).from_json(data["unexpected"])
                 self.query_one(TriggeredKeys).from_json(data["triggered"])
+                self.query_one(UnknownKeys).from_json(data["unknown"])
                 self.post_message(self.DataLoaded())
                 if not self.query_one(Environment).is_similar(
                     data.get("environment", {})
@@ -212,6 +221,17 @@ class Main(Screen):
         self.query_one(KeyInput).tab_tested = "tab" in triggered
         self.query_one(KeyInput).shift_tab_tested = "shift+tab" in triggered
 
+    def _add(self, key: str | Key | TestableKey, target: KeysDisplay) -> None:
+        """Add a key to the target list.
+
+        Args:
+            key: The key to record.
+            target: The list to record the key in.
+        """
+        target.add_option(key if isinstance(key, TestableKey) else TestableKey(key))
+        target.action_last()
+        self._mark_dirty()
+
     @on(KeyInput.Triggered)
     def mark_key_as_triggered(self, event: KeyInput.Triggered):
         """Handle a key being triggered.
@@ -225,26 +245,32 @@ class Main(Screen):
         unexpected = self.query_one(UnexpectedKeys)
         triggered = self.query_one(TriggeredKeys)
 
-        def _add(key: Key | TestableKey, target: KeysDisplay) -> None:
-            target.add_option(key if isinstance(key, TestableKey) else TestableKey(key))
-            target.action_last()
-            self._mark_dirty()
-
         # First off, get the key that was triggered.
         triggered_key = event.key
 
         # Figure out where the key should land, if at all.
         if triggered_key in expected:
             # It's in the expected list, so move it over to the triggered list.
-            _add(expected.get_option(triggered_key.key), triggered)
+            self._add(expected.get_option(triggered_key.key), triggered)
             expected.remove_option(triggered_key.key)
         elif triggered_key.is_printable:
             # Printable keys that we weren't expecting are treated as kind
             # of expected, so if it isn't in the triggered list yet, add it
             # now.
             if triggered_key not in triggered:
-                _add(triggered_key, triggered)
+                self._add(triggered_key, triggered)
         elif triggered_key not in triggered and triggered_key not in unexpected:
             # It's not expected and hasn't been triggered, and so far hasn't
             # landed in the unexpected list; so add it now.
-            _add(triggered_key, unexpected)
+            self._add(triggered_key, unexpected)
+
+    @on(KeyInput.Unknown)
+    def record_unknown_key(self, event: KeyInput.Unknown) -> None:
+        """Record an unknown key.
+
+        Args:
+            event: The unknown key event.
+        """
+        unknown = self.query_one(UnknownKeys)
+        if event.sequence not in unknown:
+            self._add(event.sequence, unknown)
