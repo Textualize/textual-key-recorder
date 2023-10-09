@@ -2,6 +2,7 @@
 
 from textual import on
 from textual.app import ComposeResult
+from textual.binding import Binding
 from textual.containers import Horizontal, Vertical
 from textual.screen import ModalScreen
 from textual.widgets import Button, Label
@@ -34,6 +35,10 @@ class YesNo(ModalScreen[bool]):
         margin-left: 1;
     }
     """
+
+    BINDINGS = [
+        Binding("escape", "app.pop_screen", show=False),
+    ]
 
     def __init__(self, question: str = "") -> None:
         """Initialise the question dialog.
