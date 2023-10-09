@@ -2,6 +2,7 @@
 
 from textual import on
 from textual.app import ComposeResult
+from textual.binding import Binding
 from textual.containers import Horizontal, Vertical
 from textual.screen import ModalScreen
 from textual.widgets import Button, TextArea
@@ -34,6 +35,10 @@ class Annotation(ModalScreen[str]):
     }
     """
 
+    BINDINGS = [
+        Binding("escape", "app.pop_screen", show=False),
+    ]
+
     def __init__(self, key: str, annotation: str = "") -> None:
         """Initialise the annotation dialog.
 
@@ -64,4 +69,4 @@ class Annotation(ModalScreen[str]):
     @on(Button.Pressed, "#cancel")
     def cancel(self) -> None:
         """Handle the cancel button."""
-        self.dismiss(self._annotation)
+        self.app.pop_screen()
