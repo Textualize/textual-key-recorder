@@ -23,7 +23,7 @@ from ..dialogs import Annotation
 class TestableKey(Option):
     """A class for holding details of a testable key."""
 
-    NOTE_ICON: Final[str] = Emoji.replace(":spiral_notepad:")
+    NOTE_ICON: Final[str] = Emoji.replace(":paperclip:")
     """The icon to use to indicate a key has a note attached."""
 
     def __init__(self, key: str | Key, notes: str = "") -> None:
