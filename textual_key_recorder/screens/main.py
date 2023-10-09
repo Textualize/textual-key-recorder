@@ -233,7 +233,7 @@ class Main(Screen):
         self._mark_dirty()
 
     @on(KeyInput.Triggered)
-    def mark_key_as_triggered(self, event: KeyInput.Triggered):
+    def mark_key_as_triggered(self, event: KeyInput.Triggered) -> None:
         """Handle a key being triggered.
 
         Args:
