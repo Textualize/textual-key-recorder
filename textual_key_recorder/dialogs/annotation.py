@@ -19,7 +19,7 @@ class Annotation(ModalScreen[str]):
     Vertical {
         width: 50%;
         height: 50%;
-        border: panel $accent;
+        border: panel cornflowerblue;
         padding: 1 2;
         background: $panel;
     }
