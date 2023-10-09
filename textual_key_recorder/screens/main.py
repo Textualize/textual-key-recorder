@@ -13,7 +13,7 @@ from textual.events import Key
 from textual.message import Message
 from textual.reactive import var
 from textual.screen import Screen
-from textual.widgets import Footer, Header
+from textual.widgets import Button, Footer, Header
 
 from textual_fspicker import FileOpen, FileSave, Filters
 
@@ -218,10 +218,33 @@ class AdminArea(Horizontal):
 class Main(Screen):
     """The main screen of the application."""
 
+    CSS = """
+    #inputs {
+        height: auto;
+    }
+
+    #toolbar {
+        border: round cornflowerblue 50%;
+        background: $panel;
+        width: auto;
+        height: auto;
+    }
+
+    #toolbar Button {
+        border: none;
+        height: auto;
+    }
+    """
+
     def compose(self) -> ComposeResult:
         """Compose the child widgets."""
         yield Header()
-        yield KeyInput()
+        with Horizontal(id="inputs"):
+            yield KeyInput()
+            with Vertical(id="toolbar"):
+                yield Button("Load", id="load")
+                yield Button("Save", id="save")
+                yield Button("Quit", id="quit_recorder")
         yield AdminArea()
         yield Footer()
 
@@ -290,3 +313,17 @@ class Main(Screen):
         unknown = self.query_one(UnknownKeys)
         if event.sequence not in unknown:
             self._add(event.sequence, unknown)
+
+    @on(Button.Pressed)
+    async def toolbar_button(self, event: Button.Pressed) -> None:
+        """Handle toolbar buttons.
+
+        Args:
+            event: The button press event.
+        """
+        if (
+            event.control.id
+            and event.control.parent
+            and event.control.parent.id == "toolbar"
+        ):
+            await self.query_one(AdminArea).run_action(event.control.id)

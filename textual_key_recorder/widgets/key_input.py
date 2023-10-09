@@ -20,6 +20,7 @@ class KeyInput(Static, can_focus=True):
         height: 5;
         padding: 1;
         text-align: center;
+        width: 1fr;
     }
 
     KeyInput:focus {
