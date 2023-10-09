@@ -23,6 +23,9 @@ from ..dialogs import Annotation
 class TestableKey(Option):
     """A class for holding details of a testable key."""
 
+    NOTE_ICON: Final[str] = Emoji.replace(":spiral_notepad:")
+    """The icon to use to indicate a key has a note attached."""
+
     def __init__(self, key: str | Key, notes: str = "") -> None:
         """Initialise the testable key.
 
@@ -31,8 +34,20 @@ class TestableKey(Option):
         """
         key = key if isinstance(key, str) else key.key
         super().__init__(key, id=key)
-        self.notes = notes
+        self._notes = notes
         """Holds user-entered notes about the key."""
+
+    @property
+    def notes(self) -> str:
+        """The notes for the key."""
+        return self._notes
+
+    @notes.setter
+    def notes(self, notes: str) -> None:
+        """Set the notes for the key."""
+        self._notes = notes
+        assert self.id is not None
+        self.set_prompt(f"{self.id} {self.NOTE_ICON}" if notes.strip() else self.id)
 
     def to_json(self) -> dict[str, str]:
         """Get the key data as a json-friendly data.
@@ -117,9 +132,6 @@ class KeysDisplay(OptionList):
         """
         self.clear_options().add_options(TestableKey.from_json(key) for key in data)
 
-    NOTE_ICON: Final[str] = Emoji.replace(":spiral_notepad:")
-    """The icon to use to indicate a key has a note attached."""
-
     def _update_notes(self, key: TestableKey, notes: str) -> None:
         """Update the notes for the given key.
 
@@ -127,13 +139,11 @@ class KeysDisplay(OptionList):
             key: The key to update.
             notes: The notes to update the key with.
         """
-        assert key.id is not None
         if key.notes != notes:
             self.post_message(self.NotesUpdated(self, key))
             key.notes = notes
-            self.replace_option_prompt(
-                key.id, f"{key.id} {self.NOTE_ICON}" if notes.strip() else key.id
-            )
+            self._refresh_content_tracking(force=True)
+            self.refresh()
 
     def action_annotate(self) -> None:
         """Annotate the current key."""
