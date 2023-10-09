@@ -64,6 +64,7 @@ class Environment(DataTable):
         height: auto;
         border: panel cornflowerblue 50%;
         color: $text 50%;
+        scrollbar-gutter: stable;
     }
 
     Environment:focus {
