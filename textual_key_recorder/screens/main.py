@@ -172,6 +172,7 @@ class AdminArea(Horizontal):
                         severity="warning",
                         timeout=8,
                     )
+                self.dirty = False
             else:
                 error()
 
