@@ -3,12 +3,11 @@
 A tool to help record what keys result in what names in a Textual
 application.
 
-## Notes to self
+## Usage
 
-<kbd>Ctrl</kbd>+<kbd>Insert</kbd> is a good example of a key that generates
-an escape sequence that isn't known to Textual (in my normal environment,
-which is macOS and kitty; use this as a good test of unknown sequence
-capture).
+This application **isn't** currently published to PyPi; and it requires
+Textual's current `main` (so a Textual **newer** than 0.38.1) to work
+correctly.
 
-The above doesn't work with the keyboard I'm using in the office (the above
-is with a Keychron K8) but <kbd>Ctrl</kbd>+<kbd>§</kbd> does work.
+To use, clone down the repository and then run `make setup`. Once done just
+run `make`.
