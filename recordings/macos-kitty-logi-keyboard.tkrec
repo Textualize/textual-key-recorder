@@ -13,15 +13,15 @@
         },
         {
             "key": "ctrl+0",
-            "notes": ""
+            "notes": "Just 0"
         },
         {
             "key": "ctrl+1",
-            "notes": ""
+            "notes": "Just 1"
         },
         {
             "key": "ctrl+2",
-            "notes": ""
+            "notes": "Ctrl+@"
         },
         {
             "key": "ctrl+3",
@@ -113,7 +113,7 @@
         },
         {
             "key": "ctrl+h",
-            "notes": ""
+            "notes": "This registers as `backspace`."
         },
         {
             "key": "ctrl+i",
@@ -125,7 +125,7 @@
         },
         {
             "key": "ctrl+m",
-            "notes": ""
+            "notes": "This registers as `enter`."
         },
         {
             "key": "ctrl+shift+0",
@@ -228,10 +228,6 @@
             "notes": "Pressing insert does nothing."
         },
         {
-            "key": "left_square_bracket",
-            "notes": ""
-        },
-        {
             "key": "low_line",
             "notes": ""
         },
@@ -258,10 +254,6 @@
         {
             "key": "shift+insert",
             "notes": "This doesn't register anything."
-        },
-        {
-            "key": "space",
-            "notes": ""
         },
         {
             "key": "vertical_line",
@@ -911,7 +903,15 @@
         {
             "key": "ctrl+o",
             "notes": ""
+        },
+        {
+            "key": "left_square_bracket",
+            "notes": ""
+        },
+        {
+            "key": "space",
+            "notes": ""
         }
     ],
-    "notes": "Control and number keys don't produce ctrl+0 through ctrl+9, generally producing other things.\n\nControl, shift and number keys don't produce anything at all."
+    "notes": "Control and number keys don't produce ctrl+0 through ctrl+9, generally producing other things.\n\nControl, shift and number keys don't produce anything at all.\n\nOut of the box Ctrl+Shift+Fn seems to be reserved by kitty for some default bindings."
 }
