@@ -52,42 +52,6 @@
             "notes": ""
         },
         {
-            "key": "ctrl+@",
-            "notes": ""
-        },
-        {
-            "key": "ctrl+a",
-            "notes": ""
-        },
-        {
-            "key": "ctrl+b",
-            "notes": ""
-        },
-        {
-            "key": "ctrl+backslash",
-            "notes": ""
-        },
-        {
-            "key": "ctrl+c",
-            "notes": ""
-        },
-        {
-            "key": "ctrl+circumflex_accent",
-            "notes": ""
-        },
-        {
-            "key": "ctrl+d",
-            "notes": ""
-        },
-        {
-            "key": "ctrl+e",
-            "notes": ""
-        },
-        {
-            "key": "ctrl+f",
-            "notes": ""
-        },
-        {
             "key": "ctrl+f1",
             "notes": "This doesn't work; no key press is registered."
         },
@@ -148,59 +112,19 @@
             "notes": "Pressing ctrl+f8 doesn't register a key."
         },
         {
-            "key": "ctrl+g",
-            "notes": ""
-        },
-        {
             "key": "ctrl+h",
             "notes": ""
         },
         {
             "key": "ctrl+i",
-            "notes": ""
+            "notes": "This registers a tab."
         },
         {
             "key": "ctrl+insert",
             "notes": ""
         },
         {
-            "key": "ctrl+j",
-            "notes": ""
-        },
-        {
-            "key": "ctrl+k",
-            "notes": ""
-        },
-        {
-            "key": "ctrl+l",
-            "notes": ""
-        },
-        {
             "key": "ctrl+m",
-            "notes": ""
-        },
-        {
-            "key": "ctrl+n",
-            "notes": ""
-        },
-        {
-            "key": "ctrl+o",
-            "notes": ""
-        },
-        {
-            "key": "ctrl+p",
-            "notes": ""
-        },
-        {
-            "key": "ctrl+q",
-            "notes": ""
-        },
-        {
-            "key": "ctrl+r",
-            "notes": ""
-        },
-        {
-            "key": "ctrl+right_square_bracket",
             "notes": ""
         },
         {
@@ -284,43 +208,7 @@
             "notes": ""
         },
         {
-            "key": "ctrl+t",
-            "notes": ""
-        },
-        {
-            "key": "ctrl+u",
-            "notes": ""
-        },
-        {
-            "key": "ctrl+underscore",
-            "notes": ""
-        },
-        {
-            "key": "ctrl+v",
-            "notes": ""
-        },
-        {
-            "key": "ctrl+w",
-            "notes": ""
-        },
-        {
-            "key": "ctrl+x",
-            "notes": ""
-        },
-        {
-            "key": "ctrl+y",
-            "notes": ""
-        },
-        {
-            "key": "ctrl+z",
-            "notes": ""
-        },
-        {
             "key": "ctrl-at",
-            "notes": ""
-        },
-        {
-            "key": "enter",
             "notes": ""
         },
         {
@@ -332,27 +220,15 @@
             "notes": ""
         },
         {
-            "key": "greater_than_sign",
-            "notes": ""
-        },
-        {
             "key": "hyphen_minus",
             "notes": ""
         },
         {
             "key": "insert",
-            "notes": ""
-        },
-        {
-            "key": "left_curly_bracket",
-            "notes": ""
+            "notes": "Pressing insert does nothing."
         },
         {
             "key": "left_square_bracket",
-            "notes": ""
-        },
-        {
-            "key": "less_than_sign",
             "notes": ""
         },
         {
@@ -361,10 +237,6 @@
         },
         {
             "key": "plus_sign",
-            "notes": ""
-        },
-        {
-            "key": "question_mark",
             "notes": ""
         },
         {
@@ -380,20 +252,12 @@
             "notes": ""
         },
         {
-            "key": "right_curly_bracket",
-            "notes": ""
-        },
-        {
-            "key": "right_square_bracket",
-            "notes": ""
-        },
-        {
             "key": "shift+escape",
             "notes": ""
         },
         {
             "key": "shift+insert",
-            "notes": ""
+            "notes": "This doesn't register anything."
         },
         {
             "key": "space",
@@ -911,7 +775,143 @@
         {
             "key": "ctrl+pagedown",
             "notes": ""
+        },
+        {
+            "key": "ctrl+right_square_bracket",
+            "notes": ""
+        },
+        {
+            "key": "less_than_sign",
+            "notes": ""
+        },
+        {
+            "key": "greater_than_sign",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+@",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+backslash",
+            "notes": "This was produced by ctrl+4."
+        },
+        {
+            "key": "ctrl+underscore",
+            "notes": "Produced by ctrl+7."
+        },
+        {
+            "key": "ctrl+circumflex_accent",
+            "notes": "Produced by ctrl+6."
+        },
+        {
+            "key": "left_curly_bracket",
+            "notes": ""
+        },
+        {
+            "key": "right_curly_bracket",
+            "notes": ""
+        },
+        {
+            "key": "right_square_bracket",
+            "notes": ""
+        },
+        {
+            "key": "enter",
+            "notes": ""
+        },
+        {
+            "key": "question_mark",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+a",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+q",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+z",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+w",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+x",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+c",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+d",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+e",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+r",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+f",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+v",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+b",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+g",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+t",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+y",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+n",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+j",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+u",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+k",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+l",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+p",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+o",
+            "notes": ""
         }
     ],
-    "notes": ""
+    "notes": "Control and number keys don't produce ctrl+0 through ctrl+9, generally producing other things.\n\nControl, shift and number keys don't produce anything at all."
 }
