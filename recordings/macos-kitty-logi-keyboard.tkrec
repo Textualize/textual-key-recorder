@@ -25,31 +25,31 @@
         },
         {
             "key": "ctrl+3",
-            "notes": ""
+            "notes": "Produces escape"
         },
         {
             "key": "ctrl+4",
-            "notes": ""
+            "notes": "Ctrl+backslash"
         },
         {
             "key": "ctrl+5",
-            "notes": ""
+            "notes": "Ctrl+right_square_bracket"
         },
         {
             "key": "ctrl+6",
-            "notes": ""
+            "notes": "ctrl+circumflex_accent"
         },
         {
             "key": "ctrl+7",
-            "notes": ""
+            "notes": "ctrl+underscore"
         },
         {
             "key": "ctrl+8",
-            "notes": ""
+            "notes": "backspace"
         },
         {
             "key": "ctrl+9",
-            "notes": ""
+            "notes": "Just 9"
         },
         {
             "key": "ctrl+f1",
@@ -216,10 +216,6 @@
             "notes": ""
         },
         {
-            "key": "grave_accent",
-            "notes": ""
-        },
-        {
             "key": "hyphen_minus",
             "notes": ""
         },
@@ -254,10 +250,6 @@
         {
             "key": "shift+insert",
             "notes": "This doesn't register anything."
-        },
-        {
-            "key": "vertical_line",
-            "notes": ""
         }
     ],
     "unexpected": [],
@@ -910,6 +902,26 @@
         },
         {
             "key": "space",
+            "notes": ""
+        },
+        {
+            "key": "grave_accent",
+            "notes": ""
+        },
+        {
+            "key": "backslash",
+            "notes": ""
+        },
+        {
+            "key": "apostrophe",
+            "notes": ""
+        },
+        {
+            "key": "vertical_line",
+            "notes": ""
+        },
+        {
+            "key": "tilde",
             "notes": ""
         }
     ],
