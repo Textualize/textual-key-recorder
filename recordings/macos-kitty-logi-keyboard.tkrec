@@ -129,47 +129,47 @@
         },
         {
             "key": "ctrl+shift+0",
-            "notes": ""
+            "notes": "Nothing"
         },
         {
             "key": "ctrl+shift+1",
-            "notes": ""
+            "notes": "Nothing"
         },
         {
             "key": "ctrl+shift+2",
-            "notes": ""
+            "notes": "Nothing"
         },
         {
             "key": "ctrl+shift+3",
-            "notes": ""
+            "notes": "Nothing"
         },
         {
             "key": "ctrl+shift+4",
-            "notes": ""
+            "notes": "Nothing"
         },
         {
             "key": "ctrl+shift+5",
-            "notes": ""
+            "notes": "Nothing"
         },
         {
             "key": "ctrl+shift+6",
-            "notes": ""
+            "notes": "Nothing"
         },
         {
             "key": "ctrl+shift+7",
-            "notes": ""
+            "notes": "Nothing"
         },
         {
             "key": "ctrl+shift+8",
-            "notes": ""
+            "notes": "Nothing"
         },
         {
             "key": "ctrl+shift+9",
-            "notes": ""
+            "notes": "Nothing"
         },
         {
             "key": "ctrl+shift+delete",
-            "notes": ""
+            "notes": "Seems to wipe the terminal, for some reason. Moving around again makes it draw back in."
         },
         {
             "key": "ctrl+shift+down",
