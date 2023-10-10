@@ -1,5 +1,6 @@
 """Notepad widget for the general session notes."""
 
+from textual.events import Key
 from textual.widgets import TextArea
 
 
@@ -22,3 +23,9 @@ class Notepad(TextArea):
     def on_mount(self) -> None:
         """Configure the notepad once mounted in the DOM."""
         self.show_line_numbers = False
+
+    async def _on_key(self, event: Key) -> None:
+        """Allow tab to move along the focus chain."""
+        if event.key == "tab":
+            event.prevent_default()
+            self.screen.focus_next()

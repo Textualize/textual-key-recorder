@@ -4,8 +4,19 @@ from textual import on
 from textual.app import ComposeResult
 from textual.binding import Binding
 from textual.containers import Horizontal, Vertical
+from textual.events import Key
 from textual.screen import ModalScreen
 from textual.widgets import Button, TextArea
+
+
+class DialogTextArea(TextArea):
+    """A version of `TextArea` that's friendly to this dialog."""
+
+    async def _on_key(self, event: Key) -> None:
+        """Allow tab to move along the focus chain."""
+        if event.key == "tab":
+            event.prevent_default()
+            self.screen.focus_next()
 
 
 class Annotation(ModalScreen[str]):
@@ -52,7 +63,7 @@ class Annotation(ModalScreen[str]):
     def compose(self) -> ComposeResult:
         with Vertical() as panel:
             panel.border_title = f"Annotation for {self._key}"
-            yield TextArea(self._annotation)
+            yield DialogTextArea(self._annotation)
             with Horizontal():
                 yield Button("Save", id="save")
                 yield Button("Cancel", id="cancel")
