@@ -230,23 +230,34 @@ class AdminArea(Horizontal):
         self._refresh_subtitle()
 
 
-class Main(Screen):
-    """The main screen of the application."""
+class Toolbar(Vertical):
+    """Toolbar widget."""
 
-    CSS = """
-    #inputs {
-        height: auto;
-    }
-
-    #toolbar {
+    DEFAULT_CSS = """
+    Toolbar {
         border: round cornflowerblue 50%;
         background: $panel;
         width: auto;
         height: auto;
     }
 
-    #toolbar Button {
+    Toolbar Button, Toolbar Button.-active {
         border: none;
+        height: auto;
+    }
+    """
+
+    BINDINGS = [
+        Binding("up", "focus_previous"),
+        Binding("down", "focus_next"),
+    ]
+
+
+class Main(Screen):
+    """The main screen of the application."""
+
+    CSS = """
+    #inputs {
         height: auto;
     }
     """
@@ -256,7 +267,7 @@ class Main(Screen):
         yield Header()
         with Horizontal(id="inputs"):
             yield KeyInput()
-            with Vertical(id="toolbar"):
+            with Toolbar():
                 yield Button("Load", id="load")
                 yield Button("Save", id="save")
                 yield Button("Quit", id="quit_recorder")
@@ -337,9 +348,5 @@ class Main(Screen):
         Args:
             event: The button press event.
         """
-        if (
-            event.control.id
-            and event.control.parent
-            and event.control.parent.id == "toolbar"
-        ):
+        if event.control.id and isinstance(event.control.parent, Toolbar):
             await self.query_one(AdminArea).run_action(event.control.id)
