@@ -340,6 +340,13 @@ class Main(Screen):
         unknown = self.query_one(UnknownKeys)
         if event.sequence not in unknown:
             self._add(event.sequence, unknown)
+        self.app.bell()
+        self.notify(
+            event.sequence,
+            title="Unknown sequence received",
+            severity="warning",
+            timeout=10,
+        )
 
     @on(Button.Pressed)
     async def toolbar_button(self, event: Button.Pressed) -> None:
