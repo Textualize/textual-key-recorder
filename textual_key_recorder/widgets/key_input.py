@@ -56,11 +56,13 @@ class KeyInput(Static, can_focus=True):
         """
         self.post_message(self.Unknown(repr(sequence)[1:-1]))
 
-    def on_mount(self) -> None:
-        """Configure the key input widget once the DOM is ready."""
-        # Hook into the parser so that we can be informed about unknown
-        # sequences.
+    def on_focus(self) -> None:
+        """Hook into the unknown sequence code while we have focus.."""
         XTermParser._reissued_sequence_debug_book = self._unknown_sequence
+
+    def on_blur(self) -> None:
+        """Unhook from the unknown sequence capture when focus is lost."""
+        XTermParser._reissued_sequence_debug_book = None
 
     def on_key(self, event: Key):
         """Handle keystrokes.
