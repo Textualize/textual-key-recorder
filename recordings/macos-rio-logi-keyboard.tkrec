@@ -56,19 +56,7 @@
             "notes": ""
         },
         {
-            "key": "ctrl+a",
-            "notes": ""
-        },
-        {
-            "key": "ctrl+b",
-            "notes": ""
-        },
-        {
             "key": "ctrl+backslash",
-            "notes": ""
-        },
-        {
-            "key": "ctrl+c",
             "notes": ""
         },
         {
@@ -76,23 +64,7 @@
             "notes": ""
         },
         {
-            "key": "ctrl+d",
-            "notes": ""
-        },
-        {
-            "key": "ctrl+down",
-            "notes": ""
-        },
-        {
-            "key": "ctrl+e",
-            "notes": ""
-        },
-        {
             "key": "ctrl+end",
-            "notes": ""
-        },
-        {
-            "key": "ctrl+f",
             "notes": ""
         },
         {
@@ -192,12 +164,8 @@
             "notes": ""
         },
         {
-            "key": "ctrl+g",
-            "notes": ""
-        },
-        {
             "key": "ctrl+h",
-            "notes": ""
+            "notes": "Backspace"
         },
         {
             "key": "ctrl+home",
@@ -205,43 +173,15 @@
         },
         {
             "key": "ctrl+i",
-            "notes": ""
+            "notes": "Tab"
         },
         {
             "key": "ctrl+insert",
             "notes": ""
         },
         {
-            "key": "ctrl+j",
-            "notes": ""
-        },
-        {
-            "key": "ctrl+k",
-            "notes": ""
-        },
-        {
-            "key": "ctrl+l",
-            "notes": ""
-        },
-        {
-            "key": "ctrl+left",
-            "notes": ""
-        },
-        {
             "key": "ctrl+m",
-            "notes": ""
-        },
-        {
-            "key": "ctrl+n",
-            "notes": ""
-        },
-        {
-            "key": "ctrl+o",
-            "notes": ""
-        },
-        {
-            "key": "ctrl+p",
-            "notes": ""
+            "notes": "Enter"
         },
         {
             "key": "ctrl+pagedown",
@@ -252,23 +192,7 @@
             "notes": ""
         },
         {
-            "key": "ctrl+q",
-            "notes": ""
-        },
-        {
-            "key": "ctrl+r",
-            "notes": ""
-        },
-        {
-            "key": "ctrl+right",
-            "notes": ""
-        },
-        {
             "key": "ctrl+right_square_bracket",
-            "notes": ""
-        },
-        {
-            "key": "ctrl+s",
             "notes": ""
         },
         {
@@ -352,47 +276,11 @@
             "notes": ""
         },
         {
-            "key": "ctrl+t",
-            "notes": ""
-        },
-        {
-            "key": "ctrl+u",
-            "notes": ""
-        },
-        {
             "key": "ctrl+underscore",
             "notes": ""
         },
         {
-            "key": "ctrl+up",
-            "notes": ""
-        },
-        {
-            "key": "ctrl+v",
-            "notes": ""
-        },
-        {
-            "key": "ctrl+w",
-            "notes": ""
-        },
-        {
-            "key": "ctrl+x",
-            "notes": ""
-        },
-        {
-            "key": "ctrl+y",
-            "notes": ""
-        },
-        {
-            "key": "ctrl+z",
-            "notes": ""
-        },
-        {
             "key": "ctrl-at",
-            "notes": ""
-        },
-        {
-            "key": "down",
             "notes": ""
         },
         {
@@ -496,27 +384,11 @@
             "notes": ""
         },
         {
-            "key": "greater_than_sign",
-            "notes": ""
-        },
-        {
             "key": "hyphen_minus",
             "notes": ""
         },
         {
             "key": "insert",
-            "notes": ""
-        },
-        {
-            "key": "left",
-            "notes": ""
-        },
-        {
-            "key": "left_curly_bracket",
-            "notes": ""
-        },
-        {
-            "key": "less_than_sign",
             "notes": ""
         },
         {
@@ -528,31 +400,11 @@
             "notes": ""
         },
         {
-            "key": "question_mark",
-            "notes": ""
-        },
-        {
-            "key": "quotation_mark",
-            "notes": ""
-        },
-        {
             "key": "return",
             "notes": ""
         },
         {
             "key": "reverse_solidus",
-            "notes": ""
-        },
-        {
-            "key": "right",
-            "notes": ""
-        },
-        {
-            "key": "right_curly_bracket",
-            "notes": ""
-        },
-        {
-            "key": "shift+down",
             "notes": ""
         },
         {
@@ -564,31 +416,7 @@
             "notes": ""
         },
         {
-            "key": "shift+left",
-            "notes": ""
-        },
-        {
-            "key": "shift+right",
-            "notes": ""
-        },
-        {
-            "key": "shift+tab",
-            "notes": ""
-        },
-        {
-            "key": "shift+up",
-            "notes": ""
-        },
-        {
             "key": "space",
-            "notes": ""
-        },
-        {
-            "key": "up",
-            "notes": ""
-        },
-        {
-            "key": "vertical_line",
             "notes": ""
         }
     ],
@@ -959,7 +787,331 @@
         {
             "key": "ctrl+delete",
             "notes": ""
+        },
+        {
+            "key": "ctrl+q",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+w",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+e",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+r",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+t",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+y",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+u",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+o",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+p",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+a",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+s",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+d",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+f",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+g",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+j",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+k",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+l",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+z",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+x",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+c",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+v",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+b",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+n",
+            "notes": ""
+        },
+        {
+            "key": "up",
+            "notes": ""
+        },
+        {
+            "key": "down",
+            "notes": ""
+        },
+        {
+            "key": "right",
+            "notes": ""
+        },
+        {
+            "key": "left",
+            "notes": ""
+        },
+        {
+            "key": "shift+up",
+            "notes": ""
+        },
+        {
+            "key": "shift+down",
+            "notes": ""
+        },
+        {
+            "key": "shift+left",
+            "notes": ""
+        },
+        {
+            "key": "shift+right",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+up",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+down",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+left",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+right",
+            "notes": ""
+        },
+        {
+            "key": "tilde",
+            "notes": ""
+        },
+        {
+            "key": "vertical_line",
+            "notes": ""
+        },
+        {
+            "key": "left_curly_bracket",
+            "notes": ""
+        },
+        {
+            "key": "right_curly_bracket",
+            "notes": ""
+        },
+        {
+            "key": "quotation_mark",
+            "notes": ""
+        },
+        {
+            "key": "inverted_exclamation_mark",
+            "notes": ""
+        },
+        {
+            "key": "trade_mark_sign",
+            "notes": ""
+        },
+        {
+            "key": "pound_sign",
+            "notes": ""
+        },
+        {
+            "key": "cent_sign",
+            "notes": ""
+        },
+        {
+            "key": "infinity",
+            "notes": ""
+        },
+        {
+            "key": "pilcrow_sign",
+            "notes": ""
+        },
+        {
+            "key": "bullet",
+            "notes": ""
+        },
+        {
+            "key": "\u00aa",
+            "notes": ""
+        },
+        {
+            "key": "\u00ba",
+            "notes": ""
+        },
+        {
+            "key": "en_dash",
+            "notes": ""
+        },
+        {
+            "key": "not_equal_to",
+            "notes": ""
+        },
+        {
+            "key": "shift+tab",
+            "notes": ""
+        },
+        {
+            "key": "less_than_sign",
+            "notes": ""
+        },
+        {
+            "key": "greater_than_sign",
+            "notes": ""
+        },
+        {
+            "key": "Q",
+            "notes": ""
+        },
+        {
+            "key": "W",
+            "notes": ""
+        },
+        {
+            "key": "E",
+            "notes": ""
+        },
+        {
+            "key": "R",
+            "notes": ""
+        },
+        {
+            "key": "T",
+            "notes": ""
+        },
+        {
+            "key": "Y",
+            "notes": ""
+        },
+        {
+            "key": "U",
+            "notes": ""
+        },
+        {
+            "key": "I",
+            "notes": ""
+        },
+        {
+            "key": "O",
+            "notes": ""
+        },
+        {
+            "key": "P",
+            "notes": ""
+        },
+        {
+            "key": "L",
+            "notes": ""
+        },
+        {
+            "key": "K",
+            "notes": ""
+        },
+        {
+            "key": "J",
+            "notes": ""
+        },
+        {
+            "key": "H",
+            "notes": ""
+        },
+        {
+            "key": "G",
+            "notes": ""
+        },
+        {
+            "key": "F",
+            "notes": ""
+        },
+        {
+            "key": "D",
+            "notes": ""
+        },
+        {
+            "key": "S",
+            "notes": ""
+        },
+        {
+            "key": "A",
+            "notes": ""
+        },
+        {
+            "key": "Z",
+            "notes": ""
+        },
+        {
+            "key": "X",
+            "notes": ""
+        },
+        {
+            "key": "C",
+            "notes": ""
+        },
+        {
+            "key": "V",
+            "notes": ""
+        },
+        {
+            "key": "B",
+            "notes": ""
+        },
+        {
+            "key": "N",
+            "notes": ""
+        },
+        {
+            "key": "M",
+            "notes": ""
+        },
+        {
+            "key": "question_mark",
+            "notes": ""
         }
     ],
-    "notes": ""
+    "notes": "Anything to do with function keys seems to produce unicode characters rather than escape seqeunces.\n"
 }
