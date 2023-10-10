@@ -23,6 +23,7 @@ from ..widgets import (
     KeyInput,
     KeysDisplay,
     ExpectedKeys,
+    Notepad,
     TriggeredKeys,
     UnexpectedKeys,
     UnknownKeys,
@@ -45,6 +46,11 @@ class AdminArea(Horizontal):
 
     UnknownKeys {
         margin-top: 1;
+    }
+
+    ExpectedKeys {
+        height: 3fr;
+        margin-bottom: 1;
     }
     """
 
@@ -76,7 +82,9 @@ class AdminArea(Horizontal):
 
     def compose(self) -> ComposeResult:
         """Compose the child widgets."""
-        yield ExpectedKeys()
+        with Vertical():
+            yield ExpectedKeys()
+            yield Notepad()
         with Vertical():
             with Horizontal():
                 yield TriggeredKeys()
@@ -85,7 +93,7 @@ class AdminArea(Horizontal):
                     yield UnknownKeys()
             yield Environment()
 
-    def to_json(self) -> dict[str, dict[str, str] | list[dict[str, str]]]:
+    def to_json(self) -> dict[str, dict[str, str] | list[dict[str, str]] | str]:
         """Get the state of the screen as a json-friendly data structure.
 
         Returns:
@@ -97,6 +105,7 @@ class AdminArea(Horizontal):
             "unexpected": self.query_one(UnexpectedKeys).to_json(),
             "unknown": self.query_one(UnknownKeys).to_json(),
             "triggered": self.query_one(TriggeredKeys).to_json(),
+            "notes": self.query_one(Notepad).text,
         }
 
     def _save_data(self, save_file: Path | None) -> None:
@@ -153,6 +162,7 @@ class AdminArea(Horizontal):
                 self.query_one(UnexpectedKeys).from_json(data["unexpected"])
                 self.query_one(TriggeredKeys).from_json(data["triggered"])
                 self.query_one(UnknownKeys).from_json(data["unknown"])
+                self.query_one(Notepad).load_text(data.get("notes", ""))
                 self.post_message(self.DataLoaded())
                 if not self.query_one(Environment).is_similar(
                     data.get("environment", {})
@@ -254,6 +264,7 @@ class Main(Screen):
         yield Footer()
 
     @on(KeysDisplay.NotesUpdated)
+    @on(Notepad.Changed)
     def _mark_dirty(self) -> None:
         """Mark the data as dirty in response to events."""
         self.query_one(AdminArea).dirty = True
