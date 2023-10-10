@@ -241,7 +241,7 @@ class Toolbar(Vertical):
         height: auto;
     }
 
-    Toolbar Button, Toolbar Button.-active {
+    Toolbar Button, Toolbar Button:hover, Toolbar Button.-active {
         border: none;
         height: auto;
     }
