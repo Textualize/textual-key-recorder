@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from json import dumps, loads, JSONDecodeError
+from json import JSONDecodeError, dumps, loads
 from pathlib import Path
 
 from textual import on
@@ -14,20 +14,19 @@ from textual.message import Message
 from textual.reactive import var
 from textual.screen import Screen
 from textual.widgets import Button, Footer, Header
-
 from textual_fspicker import FileOpen, FileSave, Filters
 
 from ..dialogs import YesNo
 from ..widgets import (
     Environment,
+    ExpectedKeys,
     KeyInput,
     KeysDisplay,
-    ExpectedKeys,
     Notepad,
+    TestableKey,
     TriggeredKeys,
     UnexpectedKeys,
     UnknownKeys,
-    TestableKey,
 )
 
 

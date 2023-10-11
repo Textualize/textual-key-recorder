@@ -2,20 +2,17 @@
 
 from __future__ import annotations
 
-from typing import cast
-
-from typing_extensions import Final, Self
-
 from dataclasses import dataclass
 from functools import partial
-
-from textual.binding import Binding
-from textual.message import Message
-from textual.events import Key
-from textual.widgets import OptionList
-from textual.widgets.option_list import Option, OptionDoesNotExist
+from typing import cast
 
 from rich.emoji import Emoji
+from textual.binding import Binding
+from textual.events import Key
+from textual.message import Message
+from textual.widgets import OptionList
+from textual.widgets.option_list import Option, OptionDoesNotExist
+from typing_extensions import Final, Self
 
 from ..dialogs import Annotation
 
