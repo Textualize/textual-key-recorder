@@ -155,4 +155,12 @@ class KeysDisplay(OptionList):
             )
 
     def get_option(self, option_id: str) -> TestableKey:
+        """Override to cast the return type to the `Option` subclass.
+
+        Args:
+            option_id: The ID of the option to get.
+
+        Returns:
+            The testable key with that ID.
+        """
         return cast(TestableKey, super().get_option(option_id))
