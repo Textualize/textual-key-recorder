@@ -24,7 +24,7 @@ classifiers = [
 
 [tool.poetry.dependencies]
 python = "^3.11"
-textual = "^0.39.0"
+textual = ">=0.39.0"
 textual-fspicker = "^0.0.10"
 
 [tool.poetry.group.dev.dependencies]
