@@ -15,3 +15,8 @@ class TextualKeyRecorder(App[None]):
     def on_mount(self) -> None:
         """Set up the application once the DOM is ready."""
         self.push_screen(Main())
+
+
+def run() -> None:
+    """Run the application."""
+    TextualKeyRecorder().run()

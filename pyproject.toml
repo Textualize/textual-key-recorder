@@ -36,3 +36,6 @@ black = "^23.9.1"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+tkrec = "textual_key_recorder.app:run"
