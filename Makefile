@@ -65,6 +65,14 @@ checkall: lint stricttypecheck	# Check all the things
 package:			# Build the package.
 	$(poetry) build
 
+.PHONY: testdist
+testdist: package		# Perform a test distribution
+	$(poetry) publish -r test-pypi
+
+.PHONY: dist
+dist: package		# Perform a distribution
+	$(poetry) publish
+
 ##############################################################################
 # Utility.
 .PHONY: repl
