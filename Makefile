@@ -3,7 +3,8 @@
 .DEFAULT_GOAL := run
 package       := textual_key_recorder
 code          := $(package)
-run           := poetry run
+poetry        := poetry
+run           := $(poetry) run
 python        := $(run) python
 textual       := $(run) textual
 lint          := $(run) pylint
@@ -59,10 +60,20 @@ stricttypecheck:	        # Perform strict static type checks with mypy
 checkall: lint stricttypecheck	# Check all the things
 
 ##############################################################################
+# Package/publish.
+.PHONY: package
+package:			# Build the package.
+	$(poetry) build
+
+##############################################################################
 # Utility.
 .PHONY: repl
 repl:				# Start a Python REPL
 	$(python)
+
+.PHONY: clean
+clean:				# Clean the build directories
+	rm -rf dist
 
 .PHONY: shell
 shell:				# Create a shell within the virtual environment
