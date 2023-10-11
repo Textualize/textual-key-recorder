@@ -4,7 +4,7 @@ from __future__ import annotations
 
 from typing import cast
 
-from typing_extensions import Final
+from typing_extensions import Final, Self
 
 from dataclasses import dataclass
 from functools import partial
@@ -130,7 +130,9 @@ class KeysDisplay(OptionList):
         Args:
             data: The data to load into the list.
         """
-        self.clear_options().add_options(TestableKey.from_json(key) for key in data)
+        self.clear_options().add_options(
+            TestableKey.from_json(key) for key in data
+        ).refresh_count()
 
     def _update_notes(self, key: TestableKey, notes: str) -> None:
         """Update the notes for the given key.
@@ -164,3 +166,13 @@ class KeysDisplay(OptionList):
             The testable key with that ID.
         """
         return cast(TestableKey, super().get_option(option_id))
+
+    def on_mount(self) -> None:
+        """Configure the list once the DOM is ready."""
+        self.refresh_count()
+
+    def refresh_count(self) -> Self:
+        """Refresh the count of keys in the list as shown in the border."""
+        if self.BORDER_TITLE:
+            self.border_title = f"{self.BORDER_TITLE} ({self.option_count})"
+        return self

@@ -295,8 +295,9 @@ class Main(Screen):
             key: The key to record.
             target: The list to record the key in.
         """
-        target.add_option(key if isinstance(key, TestableKey) else TestableKey(key))
-        target.action_last()
+        target.add_option(
+            key if isinstance(key, TestableKey) else TestableKey(key)
+        ).refresh_count().action_last()
         self._mark_dirty()
 
     @on(KeyInput.Triggered)
@@ -319,7 +320,7 @@ class Main(Screen):
         if triggered_key in expected:
             # It's in the expected list, so move it over to the triggered list.
             self._add(expected.get_option(triggered_key.key), triggered)
-            expected.remove_option(triggered_key.key)
+            expected.remove_option(triggered_key.key).refresh_count()
         elif triggered_key.is_printable:
             # Printable keys that we weren't expecting are treated as kind
             # of expected, so if it isn't in the triggered list yet, add it
