@@ -23,7 +23,7 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = ">=3.8"
 textual = ">=0.39.0"
 textual-fspicker = "^0.0.10"
 
