@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "textual-key-recorder"
-version = "0.1.0"
+version = "0.1.1"
 description = "A tool to help record what key names are known to Textual"
 authors = ["Dave Pearson <dave@textualize.io>"]
 license = "MIT"
@@ -23,7 +23,7 @@ classifiers = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.11"
+python = ">=3.8"
 textual = ">=0.39.0"
 textual-fspicker = "^0.0.10"
 
