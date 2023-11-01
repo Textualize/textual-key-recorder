@@ -1,0 +1,1282 @@
+{
+    "environment": {
+        "os_system": "Darwin",
+        "os_release": "23.1.0",
+        "os_version": "Darwin Kernel Version 23.1.0: Mon Oct  9 21:28:45 PDT 2023; root:xnu-10002.41.9~6/RELEASE_ARM64_T6020",
+        "textual": "0.39.0",
+        "terminal": "rio (0.0.26)"
+    },
+    "expected": [
+        {
+            "key": "commercial_at",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+0",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+1",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+2",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+3",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+4",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+5",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+6",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+7",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+8",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+9",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+@",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+circumflex_accent",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+delete",
+            "notes": "Emits shift+ instead"
+        },
+        {
+            "key": "ctrl+down",
+            "notes": "Emits shift+ instead"
+        },
+        {
+            "key": "ctrl+end",
+            "notes": "Emits shift+ instead"
+        },
+        {
+            "key": "ctrl+f1",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+f10",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+f11",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+f12",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+f13",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+f14",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+f15",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+f16",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+f17",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+f18",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+f19",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+f2",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+f20",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+f21",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+f22",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+f23",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+f24",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+f3",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+f4",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+f5",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+f6",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+f7",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+f8",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+f9",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+h",
+            "notes": "Backspace"
+        },
+        {
+            "key": "ctrl+home",
+            "notes": "Emits shift+ instead."
+        },
+        {
+            "key": "ctrl+i",
+            "notes": "Tab"
+        },
+        {
+            "key": "ctrl+insert",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+left",
+            "notes": "Emits shift+ instead."
+        },
+        {
+            "key": "ctrl+m",
+            "notes": "Enter"
+        },
+        {
+            "key": "ctrl+pagedown",
+            "notes": "Emits shift+ instead"
+        },
+        {
+            "key": "ctrl+pageup",
+            "notes": "Emits shift+ instead"
+        },
+        {
+            "key": "ctrl+right",
+            "notes": "Emits shift+ instead"
+        },
+        {
+            "key": "ctrl+shift+0",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+shift+1",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+shift+2",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+shift+3",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+shift+4",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+shift+5",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+shift+6",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+shift+7",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+shift+8",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+shift+9",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+shift+delete",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+shift+down",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+shift+end",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+shift+home",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+shift+insert",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+shift+left",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+shift+pagedown",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+shift+pageup",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+shift+right",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+shift+up",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+underscore",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+up",
+            "notes": "Emits shift+ instead"
+        },
+        {
+            "key": "ctrl-at",
+            "notes": ""
+        },
+        {
+            "key": "f15",
+            "notes": ""
+        },
+        {
+            "key": "hyphen_minus",
+            "notes": ""
+        },
+        {
+            "key": "low_line",
+            "notes": ""
+        },
+        {
+            "key": "plus_sign",
+            "notes": ""
+        },
+        {
+            "key": "return",
+            "notes": ""
+        },
+        {
+            "key": "reverse_solidus",
+            "notes": ""
+        },
+        {
+            "key": "shift+escape",
+            "notes": ""
+        }
+    ],
+    "unexpected": [
+        {
+            "key": "\uf8ff",
+            "notes": "Shift+opt+k"
+        }
+    ],
+    "unknown": [
+        {
+            "key": "\\x1b[1;2R",
+            "notes": "Shift+f3\n\nBut I need to update Textual and this should then work."
+        },
+        {
+            "key": "\\x1b[2;2~\\t\\t",
+            "notes": "Ignore"
+        },
+        {
+            "key": "\\x1b[2;2~",
+            "notes": "Shift+insert"
+        }
+    ],
+    "triggered": [
+        {
+            "key": "tab",
+            "notes": ""
+        },
+        {
+            "key": "shift+tab",
+            "notes": ""
+        },
+        {
+            "key": "f1",
+            "notes": ""
+        },
+        {
+            "key": "f2",
+            "notes": ""
+        },
+        {
+            "key": "f3",
+            "notes": ""
+        },
+        {
+            "key": "f4",
+            "notes": ""
+        },
+        {
+            "key": "f5",
+            "notes": ""
+        },
+        {
+            "key": "f6",
+            "notes": ""
+        },
+        {
+            "key": "f7",
+            "notes": ""
+        },
+        {
+            "key": "f8",
+            "notes": ""
+        },
+        {
+            "key": "f9",
+            "notes": ""
+        },
+        {
+            "key": "f10",
+            "notes": ""
+        },
+        {
+            "key": "f11",
+            "notes": ""
+        },
+        {
+            "key": "f12",
+            "notes": ""
+        },
+        {
+            "key": "section_sign",
+            "notes": ""
+        },
+        {
+            "key": "1",
+            "notes": ""
+        },
+        {
+            "key": "2",
+            "notes": ""
+        },
+        {
+            "key": "3",
+            "notes": ""
+        },
+        {
+            "key": "4",
+            "notes": ""
+        },
+        {
+            "key": "5",
+            "notes": ""
+        },
+        {
+            "key": "6",
+            "notes": ""
+        },
+        {
+            "key": "7",
+            "notes": ""
+        },
+        {
+            "key": "8",
+            "notes": ""
+        },
+        {
+            "key": "9",
+            "notes": ""
+        },
+        {
+            "key": "0",
+            "notes": ""
+        },
+        {
+            "key": "minus",
+            "notes": ""
+        },
+        {
+            "key": "equals_sign",
+            "notes": ""
+        },
+        {
+            "key": "backspace",
+            "notes": ""
+        },
+        {
+            "key": "q",
+            "notes": ""
+        },
+        {
+            "key": "w",
+            "notes": ""
+        },
+        {
+            "key": "e",
+            "notes": ""
+        },
+        {
+            "key": "r",
+            "notes": ""
+        },
+        {
+            "key": "t",
+            "notes": ""
+        },
+        {
+            "key": "y",
+            "notes": ""
+        },
+        {
+            "key": "u",
+            "notes": ""
+        },
+        {
+            "key": "i",
+            "notes": ""
+        },
+        {
+            "key": "o",
+            "notes": ""
+        },
+        {
+            "key": "p",
+            "notes": ""
+        },
+        {
+            "key": "left_square_bracket",
+            "notes": ""
+        },
+        {
+            "key": "right_square_bracket",
+            "notes": ""
+        },
+        {
+            "key": "enter",
+            "notes": ""
+        },
+        {
+            "key": "a",
+            "notes": ""
+        },
+        {
+            "key": "s",
+            "notes": ""
+        },
+        {
+            "key": "d",
+            "notes": ""
+        },
+        {
+            "key": "f",
+            "notes": ""
+        },
+        {
+            "key": "g",
+            "notes": ""
+        },
+        {
+            "key": "h",
+            "notes": ""
+        },
+        {
+            "key": "j",
+            "notes": ""
+        },
+        {
+            "key": "k",
+            "notes": ""
+        },
+        {
+            "key": "l",
+            "notes": ""
+        },
+        {
+            "key": "semicolon",
+            "notes": ""
+        },
+        {
+            "key": "apostrophe",
+            "notes": ""
+        },
+        {
+            "key": "backslash",
+            "notes": ""
+        },
+        {
+            "key": "grave_accent",
+            "notes": ""
+        },
+        {
+            "key": "z",
+            "notes": ""
+        },
+        {
+            "key": "x",
+            "notes": ""
+        },
+        {
+            "key": "c",
+            "notes": ""
+        },
+        {
+            "key": "v",
+            "notes": ""
+        },
+        {
+            "key": "b",
+            "notes": ""
+        },
+        {
+            "key": "n",
+            "notes": ""
+        },
+        {
+            "key": "m",
+            "notes": ""
+        },
+        {
+            "key": "comma",
+            "notes": ""
+        },
+        {
+            "key": "full_stop",
+            "notes": ""
+        },
+        {
+            "key": "slash",
+            "notes": ""
+        },
+        {
+            "key": "insert",
+            "notes": ""
+        },
+        {
+            "key": "delete",
+            "notes": ""
+        },
+        {
+            "key": "home",
+            "notes": ""
+        },
+        {
+            "key": "end",
+            "notes": ""
+        },
+        {
+            "key": "pageup",
+            "notes": ""
+        },
+        {
+            "key": "pagedown",
+            "notes": ""
+        },
+        {
+            "key": "up",
+            "notes": ""
+        },
+        {
+            "key": "down",
+            "notes": ""
+        },
+        {
+            "key": "left",
+            "notes": ""
+        },
+        {
+            "key": "right",
+            "notes": ""
+        },
+        {
+            "key": "space",
+            "notes": ""
+        },
+        {
+            "key": "f13",
+            "notes": ""
+        },
+        {
+            "key": "f14",
+            "notes": ""
+        },
+        {
+            "key": "escape",
+            "notes": ""
+        },
+        {
+            "key": "f16",
+            "notes": ""
+        },
+        {
+            "key": "f17",
+            "notes": ""
+        },
+        {
+            "key": "f18",
+            "notes": ""
+        },
+        {
+            "key": "f19",
+            "notes": ""
+        },
+        {
+            "key": "f20",
+            "notes": ""
+        },
+        {
+            "key": "f21",
+            "notes": ""
+        },
+        {
+            "key": "f22",
+            "notes": ""
+        },
+        {
+            "key": "f23",
+            "notes": ""
+        },
+        {
+            "key": "f24",
+            "notes": ""
+        },
+        {
+            "key": "plus_minus_sign",
+            "notes": ""
+        },
+        {
+            "key": "exclamation_mark",
+            "notes": ""
+        },
+        {
+            "key": "at",
+            "notes": ""
+        },
+        {
+            "key": "number_sign",
+            "notes": ""
+        },
+        {
+            "key": "dollar_sign",
+            "notes": ""
+        },
+        {
+            "key": "percent_sign",
+            "notes": ""
+        },
+        {
+            "key": "circumflex_accent",
+            "notes": ""
+        },
+        {
+            "key": "ampersand",
+            "notes": ""
+        },
+        {
+            "key": "asterisk",
+            "notes": ""
+        },
+        {
+            "key": "left_parenthesis",
+            "notes": ""
+        },
+        {
+            "key": "right_parenthesis",
+            "notes": ""
+        },
+        {
+            "key": "underscore",
+            "notes": ""
+        },
+        {
+            "key": "plus",
+            "notes": ""
+        },
+        {
+            "key": "Q",
+            "notes": ""
+        },
+        {
+            "key": "W",
+            "notes": ""
+        },
+        {
+            "key": "E",
+            "notes": ""
+        },
+        {
+            "key": "R",
+            "notes": ""
+        },
+        {
+            "key": "T",
+            "notes": ""
+        },
+        {
+            "key": "Y",
+            "notes": ""
+        },
+        {
+            "key": "U",
+            "notes": ""
+        },
+        {
+            "key": "I",
+            "notes": ""
+        },
+        {
+            "key": "O",
+            "notes": ""
+        },
+        {
+            "key": "P",
+            "notes": ""
+        },
+        {
+            "key": "left_curly_bracket",
+            "notes": ""
+        },
+        {
+            "key": "right_curly_bracket",
+            "notes": ""
+        },
+        {
+            "key": "A",
+            "notes": ""
+        },
+        {
+            "key": "S",
+            "notes": ""
+        },
+        {
+            "key": "D",
+            "notes": ""
+        },
+        {
+            "key": "F",
+            "notes": ""
+        },
+        {
+            "key": "G",
+            "notes": ""
+        },
+        {
+            "key": "H",
+            "notes": ""
+        },
+        {
+            "key": "J",
+            "notes": ""
+        },
+        {
+            "key": "K",
+            "notes": ""
+        },
+        {
+            "key": "L",
+            "notes": ""
+        },
+        {
+            "key": "colon",
+            "notes": ""
+        },
+        {
+            "key": "quotation_mark",
+            "notes": ""
+        },
+        {
+            "key": "vertical_line",
+            "notes": ""
+        },
+        {
+            "key": "tilde",
+            "notes": ""
+        },
+        {
+            "key": "Z",
+            "notes": ""
+        },
+        {
+            "key": "X",
+            "notes": ""
+        },
+        {
+            "key": "C",
+            "notes": ""
+        },
+        {
+            "key": "V",
+            "notes": ""
+        },
+        {
+            "key": "B",
+            "notes": ""
+        },
+        {
+            "key": "N",
+            "notes": ""
+        },
+        {
+            "key": "M",
+            "notes": ""
+        },
+        {
+            "key": "less_than_sign",
+            "notes": ""
+        },
+        {
+            "key": "greater_than_sign",
+            "notes": ""
+        },
+        {
+            "key": "question_mark",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+q",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+w",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+e",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+r",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+t",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+y",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+u",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+o",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+p",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+right_square_bracket",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+a",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+s",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+d",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+f",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+g",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+j",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+k",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+l",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+backslash",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+z",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+x",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+c",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+v",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+b",
+            "notes": ""
+        },
+        {
+            "key": "ctrl+n",
+            "notes": ""
+        },
+        {
+            "key": "shift+insert",
+            "notes": "This was actually ctrl+insert"
+        },
+        {
+            "key": "shift+delete",
+            "notes": "Ctrl+delete too, it seems"
+        },
+        {
+            "key": "shift+home",
+            "notes": "ctrl+home too"
+        },
+        {
+            "key": "shift+end",
+            "notes": "ctrl+end too"
+        },
+        {
+            "key": "shift+pageup",
+            "notes": "ctrl+pageup too"
+        },
+        {
+            "key": "shift+pagedown",
+            "notes": "ctrl+pagedn too"
+        },
+        {
+            "key": "shift+left",
+            "notes": "ctrl+left too"
+        },
+        {
+            "key": "shift+right",
+            "notes": "ctrl+right too"
+        },
+        {
+            "key": "shift+up",
+            "notes": "ctrl+up too"
+        },
+        {
+            "key": "shift+down",
+            "notes": "ctrl+down too"
+        },
+        {
+            "key": "\u0152",
+            "notes": ""
+        },
+        {
+            "key": "\u0153",
+            "notes": ""
+        },
+        {
+            "key": "n_ary_summation",
+            "notes": ""
+        },
+        {
+            "key": "acute_accent",
+            "notes": ""
+        },
+        {
+            "key": "registered_sign",
+            "notes": ""
+        },
+        {
+            "key": "dagger",
+            "notes": ""
+        },
+        {
+            "key": "yen_sign",
+            "notes": ""
+        },
+        {
+            "key": "diaeresis",
+            "notes": ""
+        },
+        {
+            "key": "\u02c6",
+            "notes": ""
+        },
+        {
+            "key": "\u00f8",
+            "notes": ""
+        },
+        {
+            "key": "\u03c0",
+            "notes": ""
+        },
+        {
+            "key": "left_double_quotation_mark",
+            "notes": ""
+        },
+        {
+            "key": "left_single_quotation_mark",
+            "notes": ""
+        },
+        {
+            "key": "\u00e5",
+            "notes": ""
+        },
+        {
+            "key": "\u00df",
+            "notes": ""
+        },
+        {
+            "key": "partial_differential",
+            "notes": ""
+        },
+        {
+            "key": "\u0192",
+            "notes": ""
+        },
+        {
+            "key": "copyright_sign",
+            "notes": ""
+        },
+        {
+            "key": "dot_above",
+            "notes": ""
+        },
+        {
+            "key": "increment",
+            "notes": ""
+        },
+        {
+            "key": "ring_above",
+            "notes": ""
+        },
+        {
+            "key": "not_sign",
+            "notes": ""
+        },
+        {
+            "key": "horizontal_ellipsis",
+            "notes": ""
+        },
+        {
+            "key": "\u00e6",
+            "notes": ""
+        },
+        {
+            "key": "left_pointing_double_angle_quotation_mark",
+            "notes": ""
+        },
+        {
+            "key": "\u03a9",
+            "notes": ""
+        },
+        {
+            "key": "almost_equal_to",
+            "notes": ""
+        },
+        {
+            "key": "\u00e7",
+            "notes": ""
+        },
+        {
+            "key": "square_root",
+            "notes": ""
+        },
+        {
+            "key": "integral",
+            "notes": ""
+        },
+        {
+            "key": "small_tilde",
+            "notes": ""
+        },
+        {
+            "key": "\u00b5",
+            "notes": ""
+        },
+        {
+            "key": "less_than_or_equal_to",
+            "notes": ""
+        },
+        {
+            "key": "greater_than_or_equal_to",
+            "notes": ""
+        },
+        {
+            "key": "division_sign",
+            "notes": ""
+        },
+        {
+            "key": "double_low_9_quotation_mark",
+            "notes": ""
+        },
+        {
+            "key": "per_mille_sign",
+            "notes": ""
+        },
+        {
+            "key": "\u02c7",
+            "notes": ""
+        },
+        {
+            "key": "\u00c1",
+            "notes": ""
+        },
+        {
+            "key": "\u00d8",
+            "notes": ""
+        },
+        {
+            "key": "n_ary_product",
+            "notes": ""
+        },
+        {
+            "key": "right_double_quotation_mark",
+            "notes": ""
+        },
+        {
+            "key": "right_single_quotation_mark",
+            "notes": ""
+        },
+        {
+            "key": "\u00c5",
+            "notes": ""
+        },
+        {
+            "key": "\u00cd",
+            "notes": ""
+        },
+        {
+            "key": "\u00ce",
+            "notes": ""
+        },
+        {
+            "key": "\u00cf",
+            "notes": ""
+        },
+        {
+            "key": "double_acute_accent",
+            "notes": ""
+        },
+        {
+            "key": "\u00d3",
+            "notes": ""
+        },
+        {
+            "key": "\u00d4",
+            "notes": ""
+        },
+        {
+            "key": "\u00d2",
+            "notes": ""
+        },
+        {
+            "key": "\u00da",
+            "notes": ""
+        },
+        {
+            "key": "\u00c6",
+            "notes": ""
+        },
+        {
+            "key": "right_pointing_double_angle_quotation_mark",
+            "notes": ""
+        },
+        {
+            "key": "cedilla",
+            "notes": ""
+        },
+        {
+            "key": "ogonek",
+            "notes": ""
+        },
+        {
+            "key": "\u00c7",
+            "notes": ""
+        },
+        {
+            "key": "lozenge",
+            "notes": ""
+        },
+        {
+            "key": "\u0131",
+            "notes": ""
+        },
+        {
+            "key": "\u00c2",
+            "notes": ""
+        },
+        {
+            "key": "macron",
+            "notes": ""
+        },
+        {
+            "key": "breve",
+            "notes": ""
+        },
+        {
+            "key": "inverted_question_mark",
+            "notes": ""
+        }
+    ],
+    "notes": "Ctrl+fn keys don't appear to do anything.\n\nCtrl+number emits just the number."
+}
