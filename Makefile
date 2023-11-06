@@ -18,6 +18,10 @@ isort         := $(run) isort
 run:
 	$(python) -m $(package)
 
+.PHONY: summary
+summary:
+	@$(run) recordings/summary
+
 ##############################################################################
 # Setup/update packages the system requires.
 .PHONY: setup
