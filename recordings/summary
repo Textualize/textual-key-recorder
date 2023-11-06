@@ -89,14 +89,17 @@ def print_keys(title: str, keys: list[Key]) -> None:
         keys: The keys to print.
     """
     if keys:
-        print(f"## {title} keys ({len(keys)})")
+        print("<details>")
+        print(f"<summary>{title} keys ({len(keys)})</summary>")
         print()
         for key in keys:
             if key.notes.strip():
-                print(f"### {keyify(key.name)}")
+                print(f"## {keyify(key.name)}")
                 print()
                 print(key.notes)
                 print()
+        print()
+        print("</details>")
         print()
 
 
