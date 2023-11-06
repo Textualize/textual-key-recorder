@@ -1,0 +1,142 @@
+#!/usr/bin/env python
+"""Simple tool for generating a report of notes in the recordings."""
+
+from dataclasses import dataclass
+from json import loads
+from pathlib import Path
+
+
+@dataclass
+class Key:
+    """Class that holds the details of a single key."""
+
+    name: str
+    """The name of the key."""
+    notes: str
+    """Notes for the key."""
+
+
+def keys(source: list[dict[str, str]]) -> list[Key]:
+    """Create a list of `Key` objects from a given dictionary list.
+
+    Args:
+        source: The source data for the keys.
+
+    Returns:
+        A list of `Key` objects.
+    """
+    return [Key(key["key"], key["notes"]) for key in source]
+
+
+@dataclass
+class Recording:
+    """Class that holds the details of a terminal key recording session."""
+
+    terminal: str
+    """The name of the terminal."""
+    os_system: str
+    """The operating system the recording was done on."""
+    expected: list[Key]
+    """The list of expected keys."""
+    unexpected: list[Key]
+    """The list of unexpected keys."""
+    unknown: list[Key]
+    """The list of unknown keys."""
+    triggered: list[Key]
+    """The list of triggered keys."""
+    notes: str
+    """The overall notes for the recording."""
+
+
+def load(recording: Path) -> Recording:
+    """Load a recording.
+
+    Args:
+        recording: The path for the recording.
+
+    Returns:
+        The recording object.
+    """
+    findings = loads(recording.read_text(encoding="utf-8"))
+    return Recording(
+        findings["environment"]["terminal"],
+        findings["environment"]["os_system"],
+        keys(findings["expected"]),
+        keys(findings["unexpected"]),
+        keys(findings["unknown"]),
+        keys(findings["triggered"]),
+        findings["notes"],
+    )
+
+
+def keyify(key: str) -> str:
+    """Turn a key name into a Markdown keyboard sequence.
+
+    Args:
+        key: The key name to convert.
+
+    Returns:
+        The key name with each key wrapped in keyboard markup.
+    """
+    return "+".join([f"<kbd>{name}</kbd>" for name in key.split("+")])
+
+
+def print_keys(title: str, keys: list[Key]) -> None:
+    """Print a section for a given key list.
+
+    Args:
+        title: The title for the section.
+        keys: The keys to print.
+    """
+    if keys:
+        print(f"## {title} keys ({len(keys)})")
+        print()
+        for key in keys:
+            if key.notes.strip():
+                print(f"### {keyify(key.name)}")
+                print()
+                print(key.notes)
+                print()
+        print()
+
+
+def noteworthy(keys: list[Key]) -> list[Key]:
+    """Filter a list of keys to only those with notes.
+
+    Args:
+        keys: The list of keys to filter.
+
+    Returns:
+        A list of keys with notes.
+    """
+    return [key for key in keys if key.notes.strip()]
+
+
+def report_on(recording: Recording) -> None:
+    """Report on the given recording.
+
+    Args:
+        recording: The recording to report on.
+    """
+    print(f"# {recording.terminal} - {recording.os_system}")
+    if recording.notes.strip():
+        print()
+        print(recording.notes)
+    print()
+    print_keys("Expected", noteworthy(recording.expected))
+    print_keys("Unexpected", noteworthy(recording.unexpected))
+    print_keys("Unknown", noteworthy(recording.unknown))
+    print_keys("Triggered", noteworthy(recording.triggered))
+
+
+def produce_report() -> None:
+    """Produce a report from all the tkrec files."""
+    for recording in sorted(
+        [load(recording) for recording in Path(__file__).parent.glob("*.tkrec")],
+        key=lambda recording: recording.terminal.casefold(),
+    ):
+        report_on(recording)
+
+
+if __name__ == "__main__":
+    produce_report()
