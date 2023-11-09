@@ -4,7 +4,7 @@
         "os_release": "23.1.0",
         "os_version": "Darwin Kernel Version 23.1.0: Mon Oct  9 21:27:24 PDT 2023; root:xnu-10002.41.9~6/RELEASE_ARM64_T6000",
         "textual": "0.41.0",
-        "terminal": "XTerm(378)"
+        "terminal": "urxvt"
     },
     "expected": [
         {
