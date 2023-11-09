@@ -13,7 +13,8 @@ def produce_report() -> None:
     """Produce a report from all the tkrec files."""
     known_unknowns: defaultdict[str, set[str]] = defaultdict(set)
     for recording in Path(__file__).parent.glob("*.tkrec"):
-        for unknown in loads(recording.read_text(encoding="utf-8"))["unknown"]:
+        findings = loads(recording.read_text(encoding="utf-8"))
+        for unknown in findings["unknown"]:
             # Ignoring those keys where I've managed to bounce on the tab
             # key after the recorded seemed to "do nothing", and if we've
             # got some notes...
@@ -25,7 +26,9 @@ def produce_report() -> None:
                 and unknown["notes"]
                 and not "f3" in unknown["notes"].lower()
             ):
-                known_unknowns[unknown["key"]].add(unknown["notes"])
+                known_unknowns[unknown["key"]].add(
+                    unknown["notes"] + f" ({findings['environment']['terminal']})"
+                )
     print("| Sequence | Notes |")
     print("| - | - |")
     for key, reasons in known_unknowns.items():
