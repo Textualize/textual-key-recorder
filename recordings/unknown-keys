@@ -5,6 +5,10 @@ from json import loads
 from pathlib import Path
 
 
+def br(s: str) -> str:
+    return s.replace("\n", "<br>")
+
+
 def produce_report() -> None:
     """Produce a report from all the tkrec files."""
     known_unknowns: defaultdict[str, set[str]] = defaultdict(set)
@@ -15,11 +19,13 @@ def produce_report() -> None:
             # got some notes...
             if not unknown["key"].endswith("\\t") and unknown["notes"]:
                 known_unknowns[unknown["key"]].add(unknown["notes"])
+    print("| Sequence | Notes |")
+    print("| - | - |")
     for key, reasons in known_unknowns.items():
-        print(f"# {key}")
-        for reason in reasons:
-            print(f"- {reason}")
-        print()
+        car, *cdr = reasons
+        print(f"| {key} | {br(car)}|")
+        for reason in cdr:
+            print(f"| | {br(reason)}")
 
 
 if __name__ == "__main__":
