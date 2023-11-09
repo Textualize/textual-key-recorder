@@ -13,8 +13,9 @@ def produce_report() -> None:
     """Produce a report from all the tkrec files."""
     known_unknowns: defaultdict[str, set[str]] = defaultdict(set)
     for recording in Path(__file__).parent.glob("*.tkrec"):
-        findings = loads(recording.read_text(encoding="utf-8"))
-        for unknown in findings["unknown"]:
+        for unknown in (findings := loads(recording.read_text(encoding="utf-8")))[
+            "unknown"
+        ]:
             # Ignoring those keys where I've managed to bounce on the tab
             # key after the recorded seemed to "do nothing", and if we've
             # got some notes...
