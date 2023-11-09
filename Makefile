@@ -22,6 +22,10 @@ run:
 summary:
 	@$(run) recordings/summary
 
+.PHONY: unknown
+unknown:
+	@$(run) recordings/unknown-keys
+
 ##############################################################################
 # Setup/update packages the system requires.
 .PHONY: setup
