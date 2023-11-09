@@ -30,7 +30,7 @@ def produce_report() -> None:
     print("| - | - |")
     for key, reasons in known_unknowns.items():
         car, *cdr = reasons
-        print(f"| {key} | {br(car)}|")
+        print(f"| `{key}` | {br(car)}|")
         for reason in cdr:
             print(f"| | {br(reason)}")
 
