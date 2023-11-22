@@ -243,10 +243,6 @@
             "notes": "I missed where this came from"
         },
         {
-            "key": "\\x1b[167;5u\u00b1",
-            "notes": "This was ctrl+\u00a7 where I pressed \u00a7 again afterwards. This can be ignored."
-        },
-        {
             "key": "\\x1b[167;5u",
             "notes": "This is ctrl+\u00a7"
         },

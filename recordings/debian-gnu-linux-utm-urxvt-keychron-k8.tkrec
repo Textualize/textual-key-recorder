@@ -492,7 +492,7 @@
         },
         {
             "key": "\\x1b[7$",
-            "notes": "Shift hone"
+            "notes": "Shift home"
         },
         {
             "key": "\\x1b[8$",

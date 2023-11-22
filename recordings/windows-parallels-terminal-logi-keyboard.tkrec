@@ -261,30 +261,6 @@
         {
             "key": "\\x1b[1;5R",
             "notes": "Ctrl+F3"
-        },
-        {
-            "key": "\\x1b\\\\",
-            "notes": "Caused by using the Opt key"
-        },
-        {
-            "key": "\\x1b1\\t\\t\\t\\t\\t\\t",
-            "notes": "Caused by using the Opt key"
-        },
-        {
-            "key": "\\x1b1",
-            "notes": "Caused by using the Opt key"
-        },
-        {
-            "key": "\\x1b3\\x00",
-            "notes": "Caused by using the Opt key"
-        },
-        {
-            "key": "\\x1b4\\x00\\x00",
-            "notes": "Caused by using the Opt key"
-        },
-        {
-            "key": "\\x1b4\\t\\t\\t\\t",
-            "notes": "Caused by using the Opt key"
         }
     ],
     "triggered": [
