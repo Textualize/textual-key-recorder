@@ -12,7 +12,7 @@ def br(s: str) -> str:
 def tidy(notes: str) -> str:
     for case in (str.lower, str.upper, str.capitalize):
         for modifier in ("shift", "ctrl", "alt", "cmd"):
-            for joiner in (" ", "+"):
+            for joiner in (" ", "+", "-"):
                 notes = notes.replace(f"{case(modifier)}{joiner}", f"{modifier}-")
     return notes
 
