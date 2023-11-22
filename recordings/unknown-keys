@@ -9,6 +9,14 @@ def br(s: str) -> str:
     return s.replace("\n", "<br>")
 
 
+def tidy(notes: str) -> str:
+    for case in (str.lower, str.upper, str.capitalize):
+        for modifier in ("shift", "ctrl", "alt", "cmd"):
+            for joiner in (" ", "+"):
+                notes = notes.replace(f"{case(modifier)}{joiner}", f"{modifier}-")
+    return notes
+
+
 def produce_report() -> None:
     """Produce a report from all the tkrec files."""
     known_unknowns: defaultdict[str, set[str]] = defaultdict(set)
@@ -28,15 +36,16 @@ def produce_report() -> None:
                 and not "f3" in unknown["notes"].lower()
             ):
                 known_unknowns[unknown["key"]].add(
-                    unknown["notes"] + f" ({findings['environment']['terminal']})"
+                    tidy(unknown["notes"]) + f" ({findings['environment']['terminal']}-"
+                    f"{findings['environment']['os_system']})"
                 )
     print("| Sequence | Notes |")
     print("| - | - |")
     for key, reasons in known_unknowns.items():
         car, *cdr = reasons
-        print(f"| `{key}` | {br(car)}|")
+        print(f"| `{key}` | {br(car)} |")
         for reason in cdr:
-            print(f"| | {br(reason)}")
+            print(f"| | {br(reason)} |")
 
 
 if __name__ == "__main__":
