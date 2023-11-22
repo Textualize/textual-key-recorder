@@ -94,7 +94,7 @@ def print_keys(title: str, keys: list[Key]) -> None:
         print()
         for key in keys:
             if key.notes.strip():
-                print(f"## {keyify(key.name)}")
+                print(f"### {keyify(key.name)}")
                 print()
                 print(key.notes)
                 print()
@@ -121,7 +121,7 @@ def report_on(recording: Recording) -> None:
     Args:
         recording: The recording to report on.
     """
-    print(f"# {recording.terminal} - {recording.os_system}")
+    print(f"## {recording.terminal} - {recording.os_system}")
     if recording.notes.strip():
         print()
         print(recording.notes)
