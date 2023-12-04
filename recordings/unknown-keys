@@ -20,6 +20,9 @@ def tidy(notes: str) -> str:
 def produce_report() -> None:
     """Produce a report from all the tkrec files."""
     known_unknowns: defaultdict[str, set[str]] = defaultdict(set)
+    fixed = loads(
+        (Path(__file__).parent / "fixed-sequences.json").read_text(encoding="utf8")
+    )
     for recording in Path(__file__).parent.glob("*.tkrec"):
         for unknown in (findings := loads(recording.read_text(encoding="utf-8")))[
             "unknown"
@@ -39,13 +42,18 @@ def produce_report() -> None:
                     tidy(unknown["notes"]) + f" ({findings['environment']['terminal']}-"
                     f"{findings['environment']['os_system']})"
                 )
-    print("| Sequence | Notes |")
-    print("| - | - |")
+    print("| Sequence | Notes | Handled Via |")
+    print("| - | - | - |")
     for key, reasons in known_unknowns.items():
         car, *cdr = reasons
-        print(f"| `{key}` | {br(car)} |")
+        fixed_via = (
+            f"[#{fixed[key]}](https://github.com/Textualize/textual/pull/{fixed[key]})"
+            if key in fixed
+            else ""
+        )
+        print(f"| `{key}` | {br(car)} | {fixed_via} |")
         for reason in cdr:
-            print(f"| | {br(reason)} |")
+            print(f"| | {br(reason)} | |")
 
 
 if __name__ == "__main__":
